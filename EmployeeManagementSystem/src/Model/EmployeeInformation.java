@@ -8,14 +8,14 @@ import java.util.Date;
 
 /**
  *
- * @author jkkn7
+ * @author Krishna Kanth J
  */
 public class EmployeeInformation {
-    private int employeeId;
+    private String employeeId;
     private String employeeName;
     private int employeeAge;
     private String employeeGender;
-    private double employeePhnNumber;
+    private long employeePhnNumber;
     private String employeeEmail;
     private Date employeeStartDate;
     private String employeeLevel;
@@ -47,11 +47,11 @@ public class EmployeeInformation {
         this.employeeAge = EmployeeAge;
     }
 
-    public double getEmployeePhnNumber() {
+    public long getEmployeePhnNumber() {
         return employeePhnNumber;
     }
 
-    public void setEmployeePhnNumber(double EmployeePhnNumber) {
+    public void setEmployeePhnNumber(long EmployeePhnNumber) {
         this.employeePhnNumber = EmployeePhnNumber;
     }
 
@@ -95,11 +95,11 @@ public class EmployeeInformation {
         this.employeePositionTitle = EmployeePositionTitle;
     }
 
-    public int getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(String employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -109,6 +109,10 @@ public class EmployeeInformation {
 
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
+    }
+    @Override
+    public String toString(){
+        return (String.valueOf(employeeId));
     }
     
     

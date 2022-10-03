@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author jkkn7
+ * @author Krishna Kanth J
  */
 //Please check and change history = emplist //renamed as emplist 
 public class EmployeeInformationHistory {

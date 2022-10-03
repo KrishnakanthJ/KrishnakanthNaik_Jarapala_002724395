@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author jkkn7
+ * @author Krishna Kanth J
  */
 public class CreateJPanel extends javax.swing.JPanel {
 
@@ -38,6 +38,7 @@ public class CreateJPanel extends javax.swing.JPanel {
     public String photoPath;
     public String gender;
     public Date startDate;
+    public int error_flag = 0;
     
     
     
@@ -91,13 +92,18 @@ public class CreateJPanel extends javax.swing.JPanel {
         jcalStartDate = new com.toedter.calendar.JDateChooser();
         jLabel_Photo = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Employee Data");
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 911, 55));
 
         lblEmployeeName.setText("Name:");
+        add(lblEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 178, 89, -1));
 
         lblEmployeeID.setText("Employee ID:");
+        add(lblEmployeeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 118, -1, -1));
 
         txtEmployeeName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +115,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeNameKeyReleased(evt);
             }
         });
+        add(txtEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 175, 238, -1));
 
         txtEmployeeId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +127,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeIdKeyReleased(evt);
             }
         });
+        add(txtEmployeeId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 115, 238, -1));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +135,10 @@ public class CreateJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(417, 552, 79, -1));
 
         lblEmployeeAge.setText("Age:");
+        add(lblEmployeeAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 234, 88, -1));
 
         txtEmployeeAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,8 +150,10 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeAgeKeyReleased(evt);
             }
         });
+        add(txtEmployeeAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 235, 238, -1));
 
         lblEmployeeGender.setText("Gender:");
+        add(lblEmployeeGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 295, 88, 29));
 
         r_btnMale.setText("Male");
         r_btnMale.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +161,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 r_btnMaleActionPerformed(evt);
             }
         });
+        add(r_btnMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 302, -1, 22));
 
         r_btnFemale.setText("Female");
         r_btnFemale.addActionListener(new java.awt.event.ActionListener() {
@@ -156,8 +169,10 @@ public class CreateJPanel extends javax.swing.JPanel {
                 r_btnFemaleActionPerformed(evt);
             }
         });
+        add(r_btnFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 302, 90, 22));
 
         lblEmployeePhnNumber.setText("Contact:");
+        add(lblEmployeePhnNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 356, 88, -1));
 
         txtEmployeePhnNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,8 +184,10 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeePhnNumberKeyReleased(evt);
             }
         });
+        add(txtEmployeePhnNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 353, 238, -1));
 
         lblEmployeeEmail.setText("Email:");
+        add(lblEmployeeEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 416, 88, -1));
 
         txtEmployeeEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,8 +199,10 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeEmailKeyReleased(evt);
             }
         });
+        add(txtEmployeeEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 413, 238, -1));
 
         lblEmployeeStartDate.setText("Start Date:");
+        add(lblEmployeeStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 479, 122, -1));
 
         txtEmployeeLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,12 +214,16 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeLevelKeyReleased(evt);
             }
         });
+        add(txtEmployeeLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 353, 238, -1));
 
         lblEmployeeLevel.setText("Level:");
+        add(lblEmployeeLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 356, 124, -1));
 
         lblEmployeePostitionTitle.setText("Position Title:");
+        add(lblEmployeePostitionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 480, 124, -1));
 
         lblEmployeeTeamInfo.setText("Team Information:");
+        add(lblEmployeeTeamInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 420, -1, -1));
 
         txtEmployeeTeamInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,6 +235,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeeTeamInfoKeyReleased(evt);
             }
         });
+        add(txtEmployeeTeamInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 417, 238, -1));
 
         txtEmployeePositionTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +247,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtEmployeePositionTitleKeyReleased(evt);
             }
         });
+        add(txtEmployeePositionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 477, 238, -1));
 
         jButtonPhotoUpload.setText("Upload");
         jButtonPhotoUpload.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +255,7 @@ public class CreateJPanel extends javax.swing.JPanel {
                 jButtonPhotoUploadActionPerformed(evt);
             }
         });
+        add(jButtonPhotoUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 298, -1, -1));
 
         lblId.setText(" ");
         lblId.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,200 +263,38 @@ public class CreateJPanel extends javax.swing.JPanel {
                 lblIdKeyReleased(evt);
             }
         });
+        add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 148, 238, -1));
 
         lblName.setText(" ");
+        add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 208, 238, -1));
 
         lblAge.setText(" ");
+        add(lblAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 268, 221, -1));
 
         lblContact.setText(" ");
+        add(lblContact, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 386, 238, -1));
 
         lblEmail.setText(" ");
+        add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(179, 446, 238, -1));
 
         lblStartDate.setText(" ");
+        add(lblStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 505, 0, -1));
 
         lblLevel.setText(" ");
+        add(lblLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 386, 238, -1));
 
         lblTI.setText(" ");
+        add(lblTI, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 450, 238, -1));
 
         lblPT.setText(" ");
+        add(lblPT, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 510, 238, -1));
 
         lblEmployeePhoto.setText(" ");
+        add(lblEmployeePhoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 139, 165, 153));
+        add(jcalStartDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 473, 238, -1));
 
         jLabel_Photo.setText("Photo");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblEmployeeStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(302, 302, 302))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jcalStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblEmployeePostitionTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEmployeeLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEmployeeTeamInfo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtEmployeeTeamInfo)
-                            .addComponent(lblLevel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtEmployeeLevel, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(txtEmployeePositionTitle))
-                        .addGap(96, 96, 96))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEmployeeGender, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblEmployeeName)
-                                        .addComponent(lblEmployeeAge, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(lblEmployeeID))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEmployeeId, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                                    .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEmployeeName)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(r_btnMale)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(r_btnFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtEmployeeAge)
-                                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblAge, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(118, 118, 118)
-                                        .addComponent(lblEmployeePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(159, 159, 159)
-                                        .addComponent(jButtonPhotoUpload))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(177, 177, 177)
-                                        .addComponent(jLabel_Photo))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEmployeePhnNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEmployeePhnNumber)
-                                    .addComponent(lblContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(417, 417, 417)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblEmployeeID, lblEmployeeName});
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jcalStartDate, txtEmployeeAge, txtEmployeeEmail, txtEmployeeId, txtEmployeeLevel, txtEmployeeName, txtEmployeePhnNumber, txtEmployeePositionTitle, txtEmployeeTeamInfo});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmployeeID)
-                            .addComponent(txtEmployeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmployeeName)
-                            .addComponent(txtEmployeeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(lblEmployeeAge))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblName)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEmployeeAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAge)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(r_btnMale, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(r_btnFemale, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblEmployeeGender, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel_Photo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEmployeePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPhotoUpload)))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmployeePhnNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmployeePhnNumber))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblContact)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmployeeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmployeeEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblEmployeeStartDate)
-                            .addComponent(jcalStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(5, 5, 5)
-                        .addComponent(lblStartDate))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmployeeLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmployeeLevel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblLevel)
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmployeeTeamInfo)
-                            .addComponent(txtEmployeeTeamInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTI)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmployeePostitionTitle)
-                            .addComponent(txtEmployeePositionTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPT)))
-                .addGap(21, 21, 21)
-                .addComponent(btnSave)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblEmployeeID, lblEmployeeName});
-
+        add(jLabel_Photo, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 106, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtEmployeeNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeNameActionPerformed
@@ -447,11 +311,11 @@ public class CreateJPanel extends javax.swing.JPanel {
         
 //        f.parse(f.format(jcalStartDate.getDate()))
         
-        int employeeId = Integer.parseInt(txtEmployeeId.getText());
+        String employeeId = txtEmployeeId.getText();
         String employeeName = txtEmployeeName.getText();
         int employeeAge = Integer.parseInt(txtEmployeeAge.getText());
         String employeeGender = gender;
-        double employeePhnNumber = Double.parseDouble(txtEmployeePhnNumber.getText());
+        long employeePhnNumber = Long.parseLong(txtEmployeePhnNumber.getText());
         String employeeEmail = txtEmployeeEmail.getText();
 //        Date employeeStartDate = txtEmployeeStartDate.getDate();
 //        Date employeeStartDate = f.parse(f.format(jcalStartDate.getDate()));
@@ -462,26 +326,33 @@ public class CreateJPanel extends javax.swing.JPanel {
         String employeePositionTitle = txtEmployeePositionTitle.getText();
         String employeePhoto = photoPath;
         
-//        Append to ArrayList of employees
-        EmployeeInformation ei = history.addNewEmployee();
-        ei.setEmployeeId(employeeId);
-        ei.setEmployeeName(employeeName);
-        ei.setEmployeeAge(employeeAge);
-        ei.setEmployeePhnNumber(employeePhnNumber);
-        ei.setEmployeeEmail(employeeEmail);
-        ei.setEmployeeStartDate(employeeStartDate);
-        ei.setEmployeeLevel(employeeLevel);
-        ei.setEmployeeTeamInfo(employeeTeamInfo);
-        ei.setEmployeePositionTitle(employeePositionTitle);
-        ei.setEmployeePhoto(employeePhoto);
-        
-        
-        JOptionPane.showMessageDialog(this, "Employee Information saved!");
+        if(lblId.getText() == " " && lblName.getText() == " " && lblAge.getText() == " " && lblContact.getText() == " " && lblEmail.getText() == " " && lblLevel.getText() == " " && lblTI.getText() == " " && lblPT.getText() == " ")
+        {
+            //      Append to ArrayList of employees
+            EmployeeInformation ei = history.addNewEmployee();
+            ei.setEmployeeId(employeeId);
+            ei.setEmployeeName(employeeName);
+            ei.setEmployeeAge(employeeAge);
+            ei.setEmployeeGender(employeeGender);
+            ei.setEmployeePhnNumber(employeePhnNumber);
+            ei.setEmployeeEmail(employeeEmail);
+            ei.setEmployeeStartDate(employeeStartDate);
+            ei.setEmployeeLevel(employeeLevel);
+            ei.setEmployeeTeamInfo(employeeTeamInfo);
+            ei.setEmployeePositionTitle(employeePositionTitle);
+            ei.setEmployeePhoto(employeePhoto);
+
+            JOptionPane.showMessageDialog(this, "Employee Information saved!");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Failed!, Please fill Employee Information Correctly");
+        }
+
         
         txtEmployeeId.setText("");
         txtEmployeeName.setText("");
         txtEmployeeAge.setText("");
-//        gender = null;
+        gender = null;
         r_btnMale.setSelected(false);
         r_btnFemale.setSelected(false);
         txtEmployeePhnNumber.setText("");
@@ -648,7 +519,7 @@ public class CreateJPanel extends javax.swing.JPanel {
 
     private void txtEmployeeIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmployeeIdKeyReleased
         // TODO add your handling code here:
-        String PatterN = "^[0-9]{1,30}$";
+        String PatterN = "^[a-zA-Z0-9 '/:]+$";
         Pattern pattern = Pattern.compile(PatterN);
         Matcher patternmatch = pattern.matcher(txtEmployeeId.getText());
         if(!patternmatch.matches())
