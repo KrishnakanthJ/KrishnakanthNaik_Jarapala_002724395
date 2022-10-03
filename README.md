@@ -16,5 +16,5 @@ This is an Employee profile management system, that helps Human Resource in an o
  - IDEA like Netbeans, Eclipse, IntelliJ
  
  #### Working
- - `git clone url`
+ - `git clone https://github.com/KrishnakanthJ/KrishnakanthNaik_Jarapala_002724395.git`
  - Run main to get started with the experience.
