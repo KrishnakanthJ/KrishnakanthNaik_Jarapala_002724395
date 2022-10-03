@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI;
+package employeedirectoryui;
 
 import java.awt.Image;
 import java.awt.List;
@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.regex.*;
 
-import Model.EmployeeInformation;
-import Model.EmployeeInformationHistory;
+import employeedirectorymodel.EmployeeInformation;
+import employeedirectorymodel.EmployeeInformationHistory;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -94,10 +94,10 @@ public class CreateJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTitle.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("Create New Employee Data");
-        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 911, 55));
+        add(lblTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 17, 870, 55));
 
         lblEmployeeName.setText("Name:");
         add(lblEmployeeName, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 178, 89, -1));
