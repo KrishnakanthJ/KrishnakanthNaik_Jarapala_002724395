@@ -97,6 +97,9 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         btn_searchID = new javax.swing.JButton();
         btn_searchName = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 204, 204));
+
+        jTab_manage.setBackground(new java.awt.Color(255, 153, 153));
         jTab_manage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTab_manageMouseClicked(evt);
@@ -106,13 +109,14 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
             }
         });
 
+        jtab_add.setBackground(new java.awt.Color(255, 204, 204));
         jtab_add.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(255, 51, 0));
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Create New Doctor");
-        jtab_add.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 68, 1062, -1));
+        jtab_add.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 68, 980, -1));
 
         lblName.setText("Name:");
         jtab_add.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 172, 88, 23));
@@ -137,16 +141,20 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 26, 238, -1));
 
+        lblnameval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblnameval.setForeground(new java.awt.Color(255, 51, 51));
         lblnameval.setText(" ");
-        jtab_add.add(lblnameval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 169, 239, 22));
+        jtab_add.add(lblnameval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 171, 420, 20));
 
+        lblageval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblageval.setForeground(new java.awt.Color(255, 51, 51));
         lblageval.setText(" ");
         lblageval.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 lblagevalKeyReleased(evt);
             }
         });
-        jtab_add.add(lblageval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 269, 239, 22));
+        jtab_add.add(lblageval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 261, 430, 30));
 
         txtage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,8 +186,10 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 309, 238, -1));
 
+        lblHAval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblHAval.setForeground(new java.awt.Color(255, 51, 51));
         lblHAval.setText(" ");
-        jtab_add.add(lblHAval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 317, 438, 22));
+        jtab_add.add(lblHAval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 309, 438, 30));
 
         lblcomm.setText("Community:");
         jtab_add.add(lblcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, 30));
@@ -196,8 +206,10 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 358, 238, -1));
 
+        lblcommval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblcommval.setForeground(new java.awt.Color(255, 51, 51));
         lblcommval.setText(" ");
-        jtab_add.add(lblcommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 366, 438, 22));
+        jtab_add.add(lblcommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 358, 438, 30));
 
         lblCity.setText("City:");
         jtab_add.add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 406, 88, 31));
@@ -214,8 +226,10 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtcity, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 407, 238, -1));
 
+        lblcityval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblcityval.setForeground(new java.awt.Color(255, 51, 51));
         lblcityval.setText(" ");
-        jtab_add.add(lblcityval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 415, 239, 22));
+        jtab_add.add(lblcityval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 407, 430, 30));
 
         lblUN.setText("User Name:");
         jtab_add.add(lblUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 456, 110, 30));
@@ -232,8 +246,10 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtun, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 456, 238, -1));
 
+        lblunval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblunval.setForeground(new java.awt.Color(255, 51, 51));
         lblunval.setText(" ");
-        jtab_add.add(lblunval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 464, 239, 22));
+        jtab_add.add(lblunval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 456, 380, 30));
 
         lblpwd.setText("Password:");
         jtab_add.add(lblpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 504, 88, 31));
@@ -250,8 +266,9 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 505, 238, -1));
 
-        lblpwdval.setText(" ");
-        jtab_add.add(lblpwdval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 513, 239, 22));
+        lblpwdval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        lblpwdval.setForeground(new java.awt.Color(255, 51, 51));
+        jtab_add.add(lblpwdval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 503, 430, 30));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +291,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 
         jTab_manage.addTab("Add New Doctor", jtab_add);
 
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         displayTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -368,8 +386,8 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         jPanel2.add(txt_comm, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 219, -1));
         jPanel2.add(txt_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 219, -1));
 
-        jLabel2.setBackground(new java.awt.Color(255, 51, 0));
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Manage Doctor Details");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 16, 1062, -1));
@@ -449,24 +467,48 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
     private void populateDataToTable() {
         //TableModel is used to manipulate table content.
         // type casts tablemodel to defaultTableModel.
-    DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
-   
-    model.setRowCount(0); // used to delete empty records from table
-    
-    for (Doctor doctor : doctorlist.getDoctorlist()){
-        
-        Object[] row =  new Object[7];
-        row[0] = doctor.getDoctorID(); 
-        row[1] = doctor.getPersonName();
-        row[2] = doctor.getPersonAge();
-        row[3] = doctor.getPersonGender();
-        row[4] = doctor.getHouseAddress();
-        row[5] = doctor.getCommunityName();
-        row[6] = doctor.getCityName();
+        DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
 
-        model.addRow(row); // adds row to model
+        model.setRowCount(0); // used to delete empty records from table
 
+        for (Doctor doctor : doctorlist.getDoctorlist()){
+
+            Object[] row =  new Object[6];
+            row[0] = doctor.getDoctorID(); 
+            row[1] = doctor.getPersonName();
+            row[2] = doctor.getPersonAge();
+            row[3] = doctor.getPersonGender();
+//            row[4] = doctor.getHouseAddress();
+            row[4] = doctor.getCommunityName();
+            row[5] = doctor.getCityName();
+
+            model.addRow(row); // adds row to model
+
+        }
     }
+    
+//    populate the table with given directory or arraylist
+    private void populateDataToTable(DoctorDirectory newdoctorlist) {
+        //TableModel is used to manipulate table content.
+        // type casts tablemodel to defaultTableModel.
+        DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+
+        model.setRowCount(0); // used to delete empty records from table
+
+        for (Doctor doctor : newdoctorlist.getDoctorlist()){
+
+            Object[] row =  new Object[7];
+            row[0] = doctor.getDoctorID(); 
+            row[1] = doctor.getPersonName();
+            row[2] = doctor.getPersonAge();
+            row[3] = doctor.getPersonGender();
+//            row[4] = doctor.getHouseAddress();
+            row[4] = doctor.getCommunityName();
+            row[5] = doctor.getCityName();
+
+            model.addRow(row); // adds row to model
+
+        }
     }
     
     
@@ -728,7 +770,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         Matcher patternmatch = pattern.matcher(txtpwd.getText());
         if(!patternmatch.matches())
         {
-            lblpwdval.setText("Min 8 characters, atleast one letter, one number and one special character");
+            lblpwdval.setText("Min 8 char, valid A-Z / 0-9 / @$!%*#?&");
             error_flag =1;
         }
         else
@@ -789,6 +831,14 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
     private void jTab_manageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTab_manageMouseClicked
         // TODO add your handling code here:
         populateDataToTable();
+        txt_name.setText("");
+        txt_age.setText("");
+        txt_gender.setSelectedIndex(-1);
+        txt_ha.setText("");
+        txt_comm.setText("");
+        txt_city.setText("");
+        txt_un.setText("");
+        txt_pwd.setText("");
     }//GEN-LAST:event_jTab_manageMouseClicked
 
     private void txtSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchIDActionPerformed
@@ -809,24 +859,28 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 
     private void btn_searchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchIDActionPerformed
         // TODO add your handling code here:
-        if(!(txtSearchID.getText().isEmpty())) 
-        {
-            JOptionPane.showMessageDialog(this, "Clicked on Search and txt field is not empty");
-//            newdoctorlist.SearchPersonIDList(Integer.parseInt(txtSearchID.getText()));
-//            newEncounterPersonDirectory.AddAllNewPerson(newPersonDirectory.getPersonlist());
-//            PopulateTable(newPersonDirectory.getNewpersonDirectory());
-//            newPersonDirectory.ClearTable();
-            
-            
-            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
-//            populateDataToTable(newdoctorlist);
-//            newdoctorlist = newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()))
-//            populateDataToTable(newdoctorlist);
-//            newdoctorlist.ClearTable();
-        }
-        else{
-                JOptionPane.showMessageDialog(this, "Clicked on Search but txt field is empty");
-            }
+//        if(!(txtSearchID.getText().isEmpty())) 
+//        {
+//            JOptionPane.showMessageDialog(this, "Clicked on Search and txt field is not empty");
+////            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
+//
+//            for(var doctor : doctorlist)
+//            {
+//               if(txtSearchID.getText().equals(doctor.getDoctorID()))
+//               {               
+////                   newdoctorlist.add(doctor);
+//                   newdoctorlist.add(doctor);
+//                   populateDataToTable(newdoctorlist);
+//                   return;
+//               }
+//            }
+//            
+////            
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(this, "Clicked on Search but txt field is empty");
+//            populateDataToTable();
+//        }
         
     }//GEN-LAST:event_btn_searchIDActionPerformed
 

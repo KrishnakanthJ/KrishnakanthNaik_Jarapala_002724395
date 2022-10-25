@@ -6,6 +6,8 @@ package UI;
 
 import Model.Doctor;
 import Model.DoctorDirectory;
+import Model.Patient;
+import Model.PatientDirectory;
 import java.awt.CardLayout;
 
 /**
@@ -14,7 +16,8 @@ import java.awt.CardLayout;
  */
 public class SystemAdmin extends javax.swing.JFrame {
     
-    
+    PatientDirectory patientlist;
+    Patient patient;
     DoctorDirectory doctorlist;
     Doctor doctor;
     /**
@@ -22,6 +25,8 @@ public class SystemAdmin extends javax.swing.JFrame {
      */
     public SystemAdmin() {
         initComponents();
+        patientlist = new PatientDirectory();
+        patient = new Patient();
         doctorlist = new DoctorDirectory();
         doctor = new Doctor();
     }
@@ -46,7 +51,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        controlPanel.setBackground(new java.awt.Color(255, 204, 204));
+        controlPanel.setBackground(new java.awt.Color(255, 153, 153));
         controlPanel.setForeground(new java.awt.Color(102, 102, 0));
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 700));
 
@@ -111,7 +116,7 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         SplitPane.setLeftComponent(controlPanel);
 
-        WorkArea.setBackground(new java.awt.Color(255, 153, 153));
+        WorkArea.setBackground(new java.awt.Color(255, 204, 204));
         WorkArea.setPreferredSize(new java.awt.Dimension(1100, 700));
         WorkArea.setLayout(new java.awt.CardLayout());
         SplitPane.setRightComponent(WorkArea);
@@ -127,8 +132,8 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void patientbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientbtnActionPerformed
         // TODO add your handling code here:
-        managePatientJPanel mp = new managePatientJPanel();
-        WorkArea.add("AddPersonJPanel", mp);
+        managePatientJPanel mp = new managePatientJPanel(patientlist);
+        WorkArea.add("managePatientJPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
 //        SplitPane.setRightComponent(mp);

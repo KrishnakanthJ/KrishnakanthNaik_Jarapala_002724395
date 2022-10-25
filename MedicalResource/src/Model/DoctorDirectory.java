@@ -15,7 +15,12 @@ public class DoctorDirectory {
     
     private ArrayList<Doctor> doctorlist;
     private ArrayList<Doctor> newdoctorlist;
-
+    
+    public DoctorDirectory(){
+        this.doctorlist = new ArrayList<Doctor>();
+        this.newdoctorlist = new ArrayList<Doctor>();
+    }
+    
     public ArrayList<Doctor> getNewdoctorlist() {
         return newdoctorlist;
     }
@@ -24,11 +29,6 @@ public class DoctorDirectory {
         this.newdoctorlist = newdoctorlist;
     }
     
-    public DoctorDirectory(){
-        this.doctorlist = new ArrayList<Doctor>();
-        this.newdoctorlist = new ArrayList<Doctor>();
-    }
-
     public ArrayList<Doctor> getDoctorlist() {
         return doctorlist;
     }
