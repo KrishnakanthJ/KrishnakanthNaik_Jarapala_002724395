@@ -9,7 +9,9 @@ import Model.DoctorDirectory;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Krishnakanth Naik Jarapala
@@ -29,7 +31,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         initComponents();
         this.doctorlist = doctorlist;
         this.newdoctorlist = doctorlist;
-        
+        populateDataToTable();
     }
 
     /**
@@ -514,19 +516,25 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
     
     private void txtSearchIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIDKeyReleased
         // TODO add your handling code here:
-        
-//        
-//        if(!(txtSearchID.getText().isEmpty())) 
-//        {
-//            JOptionPane.showMessageDialog(this, "Select a record to view1111");
-//            newdoctorlist.setNewdoctorlist(doctorlist.getDoctorlist());
-//            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
-//            populateDataToTable(newdoctorlist);
-//            newdoctorlist.ClearTable();
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(this, "Select a record to view2222");
-//        }
+       
+        if(!(txtSearchID.getText().isEmpty())) 
+        {
+            int search = Integer.parseInt(txtSearchID.getText()); // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(regex));
+        }
+        else{
+            String search = ""; // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+//            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(search));
+        }
+
     }//GEN-LAST:event_txtSearchIDKeyReleased
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -817,6 +825,9 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
             txtpwd.setText("");         
         }
         
+        populateDataToTable();
+
+        
           
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -851,6 +862,25 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 
     private void txtSearchNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNameKeyReleased
         // TODO add your handling code here:
+               
+        if(!(txtSearchName.getText().isEmpty())) 
+        {
+            String search = (txtSearchName.getText()); // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            String regex = String.format("(?i)(^%s$)", search);
+            tr.setRowFilter(RowFilter.regexFilter(regex));
+        }
+        else{
+            String search = ""; // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+//            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(search));
+        }
+
     }//GEN-LAST:event_txtSearchNameKeyReleased
 
     private void lblagevalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblagevalKeyReleased
@@ -859,6 +889,14 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 
     private void btn_searchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchIDActionPerformed
         // TODO add your handling code here:
+        populateDataToTable(doctorlist);
+        
+//        DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+//        int search = Integer.parseInt(txtSearchID.getText()); // reads the search text as lower case
+//        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+//        displayTable.setRowSorter(tr);
+//        String regex = String.format("^%s$", search);
+//        tr.setRowFilter(RowFilter.regexFilter(regex));
 //        if(!(txtSearchID.getText().isEmpty())) 
 //        {
 //            JOptionPane.showMessageDialog(this, "Clicked on Search and txt field is not empty");
