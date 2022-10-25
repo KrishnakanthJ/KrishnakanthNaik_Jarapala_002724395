@@ -15,7 +15,6 @@ public class DoctorDirectory {
     
     private ArrayList<Doctor> doctorlist;
     private ArrayList<Doctor> newdoctorlist;
-    private ArrayList<Doctor> tempdoctorlist;
 
     public ArrayList<Doctor> getNewdoctorlist() {
         return newdoctorlist;
@@ -28,7 +27,6 @@ public class DoctorDirectory {
     public DoctorDirectory(){
         this.doctorlist = new ArrayList<Doctor>();
         this.newdoctorlist = new ArrayList<Doctor>();
-        this.tempdoctorlist = new ArrayList<Doctor>();
     }
 
     public ArrayList<Doctor> getDoctorlist() {
@@ -47,7 +45,7 @@ public class DoctorDirectory {
     }
 
     public void deleteProfile(Doctor ei) {
-            tempdoctorlist.remove(ei);
+            doctorlist.remove(ei);
 
 
     }
@@ -72,11 +70,6 @@ public class DoctorDirectory {
            if(doctorId == doctor.getDoctorID())
            {               
                newdoctorlist.add(doctor);
-//               JOptionPane.showMessageDialog(this,"Record Found");
-           }
-           else{
-//                JOptionPane.showMessageDialog(this, "Record not Found");
-
            }
         }
 //        return tempdoctorlist;
