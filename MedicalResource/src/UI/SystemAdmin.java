@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Model.Doctor;
+import Model.DoctorDirectory;
 import java.awt.CardLayout;
 
 /**
@@ -11,12 +13,17 @@ import java.awt.CardLayout;
  * @author Krishnakanth Naik Jarapala
  */
 public class SystemAdmin extends javax.swing.JFrame {
-
+    
+    
+    DoctorDirectory doctorlist;
+    Doctor doctor;
     /**
      * Creates new form SystemAdmin
      */
     public SystemAdmin() {
         initComponents();
+        doctorlist = new DoctorDirectory();
+        doctor = new Doctor();
     }
 
     /**
@@ -43,6 +50,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         controlPanel.setForeground(new java.awt.Color(102, 102, 0));
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 700));
 
+        patientbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         patientbtn.setText("Manage Patient");
         patientbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,8 +58,15 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
+        doctorbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         doctorbtn.setText("Manage Doctor");
+        doctorbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorbtnActionPerformed(evt);
+            }
+        });
 
+        hospitalbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         hospitalbtn.setText("Manage Hospitals");
         hospitalbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +74,13 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
+        communitybtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         communitybtn.setText("Manage Community");
+        communitybtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                communitybtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
@@ -112,6 +133,19 @@ public class SystemAdmin extends javax.swing.JFrame {
         cardlayout.next(WorkArea);
 //        SplitPane.setRightComponent(mp);
     }//GEN-LAST:event_patientbtnActionPerformed
+
+    private void doctorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorbtnActionPerformed
+        // TODO add your handling code here:
+        manageDoctorjPanel mp = new manageDoctorjPanel(doctorlist);
+        WorkArea.add("manageDoctorjPanel", mp);
+        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
+        cardlayout.next(WorkArea);
+        
+    }//GEN-LAST:event_doctorbtnActionPerformed
+
+    private void communitybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_communitybtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_communitybtnActionPerformed
 
     /**
      * @param args the command line arguments

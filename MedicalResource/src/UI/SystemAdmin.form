@@ -86,6 +86,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="patientbtn">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="10" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Manage Patient"/>
               </Properties>
               <Events>
@@ -94,11 +97,20 @@
             </Component>
             <Component class="javax.swing.JButton" name="doctorbtn">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="10" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Manage Doctor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorbtnActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="hospitalbtn">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="10" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Manage Hospitals"/>
               </Properties>
               <Events>
@@ -107,8 +119,14 @@
             </Component>
             <Component class="javax.swing.JButton" name="communitybtn">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="10" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Manage Community"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="communitybtnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
