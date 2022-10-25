@@ -28,7 +28,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
     public manageDoctorjPanel(DoctorDirectory doctorlist) {
         initComponents();
         this.doctorlist = doctorlist;
-        
+        this.newdoctorlist = doctorlist;
         
     }
 
@@ -566,7 +566,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
+              
         int selectedRowIndex = displayTable.getSelectedRow();  // gives index of selected rows
         if(selectedRowIndex < 0)
         {
@@ -581,15 +581,6 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         doctorlist.deleteProfile(selectedEntry);
         JOptionPane.showMessageDialog(this, "Selected Employee Deleted");
         populateDataToTable();
-        
-        txt_name.setText("");
-        txt_age.setText("");
-        txt_gender.setSelectedIndex(-1);
-        txt_ha.setText("");
-        txt_comm.setText("");
-        txt_city.setText("");
-        txt_un.setText("");
-        txt_pwd.setText("");
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
@@ -827,7 +818,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
 //            newPersonDirectory.ClearTable();
             
             
-//            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
+            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
 //            populateDataToTable(newdoctorlist);
 //            newdoctorlist = newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()))
 //            populateDataToTable(newdoctorlist);
