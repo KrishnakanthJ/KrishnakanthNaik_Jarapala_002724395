@@ -96,8 +96,8 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         lbl_gender = new javax.swing.JLabel();
         txt_gender = new javax.swing.JComboBox<>();
         txtSearchName = new javax.swing.JTextField();
-        btn_searchID = new javax.swing.JButton();
-        btn_searchName = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -336,7 +336,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
                 txtSearchIDKeyReleased(evt);
             }
         });
-        jPanel2.add(txtSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 63, 176, -1));
+        jPanel2.add(txtSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 176, -1));
 
         btnUpdate.setText("View & Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -429,23 +429,13 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
                 txtSearchNameKeyReleased(evt);
             }
         });
-        jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 63, 198, -1));
+        jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 198, -1));
 
-        btn_searchID.setText("Search by Doctor ID");
-        btn_searchID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchIDActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_searchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 63, -1, -1));
+        jTextField1.setText("Search by Doctor ID");
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
-        btn_searchName.setText("Search by Doctor Name");
-        btn_searchName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchNameActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_searchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 63, -1, -1));
+        jTextField2.setText("Search by Doctor Name");
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
 
         jTab_manage.addTab("Manage Doctors", jPanel2);
 
@@ -887,45 +877,6 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_lblagevalKeyReleased
 
-    private void btn_searchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchIDActionPerformed
-        // TODO add your handling code here:
-        populateDataToTable(doctorlist);
-        
-//        DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
-//        int search = Integer.parseInt(txtSearchID.getText()); // reads the search text as lower case
-//        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
-//        displayTable.setRowSorter(tr);
-//        String regex = String.format("^%s$", search);
-//        tr.setRowFilter(RowFilter.regexFilter(regex));
-//        if(!(txtSearchID.getText().isEmpty())) 
-//        {
-//            JOptionPane.showMessageDialog(this, "Clicked on Search and txt field is not empty");
-////            newdoctorlist.SearchDoctorIdList(Integer.parseInt(txtSearchID.getText()));
-//
-//            for(var doctor : doctorlist)
-//            {
-//               if(txtSearchID.getText().equals(doctor.getDoctorID()))
-//               {               
-////                   newdoctorlist.add(doctor);
-//                   newdoctorlist.add(doctor);
-//                   populateDataToTable(newdoctorlist);
-//                   return;
-//               }
-//            }
-//            
-////            
-//        }
-//        else{
-//            JOptionPane.showMessageDialog(this, "Clicked on Search but txt field is empty");
-//            populateDataToTable();
-//        }
-        
-    }//GEN-LAST:event_btn_searchIDActionPerformed
-
-    private void btn_searchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_searchNameActionPerformed
-
     private void jTab_manageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTab_manageMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTab_manageMouseEntered
@@ -936,14 +887,14 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_Save;
-    private javax.swing.JButton btn_searchID;
-    private javax.swing.JButton btn_searchName;
     private javax.swing.JTable displayTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTab_manage;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel jtab_add;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblHA;

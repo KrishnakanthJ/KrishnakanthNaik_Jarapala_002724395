@@ -4,11 +4,18 @@
  */
 package UI;
 
+import Model.Doctor;
+import Model.Encounter;
+import Model.EncounterHistory;
 import Model.Patient;
 import Model.PatientDirectory;
+import Model.Person;
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -22,7 +29,10 @@ public class managePatientJPanel extends javax.swing.JPanel {
     PatientDirectory patientlist;
     PatientDirectory newpatientlist;
     Patient patient;
-    
+    EncounterHistory encounterhistory;
+    EncounterHistory patientencounterhistory;
+    JPanel workArea;
+
     int error_flag = 0;
     
     /**
@@ -32,6 +42,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
         initComponents();
         this.patientlist = patientlist;
         this.newpatientlist = new PatientDirectory();
+        this.encounterhistory = new EncounterHistory();
+        this.patientencounterhistory = new EncounterHistory();
     }
 
     /**
@@ -122,8 +134,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayTable = new javax.swing.JTable();
-        txtSearchID = new javax.swing.JTextField();
-        btnUpdate = new javax.swing.JButton();
+        btnEncounter = new javax.swing.JButton();
         btn_Save = new javax.swing.JButton();
         lbl_comm = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
@@ -143,9 +154,11 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txt_pwd = new javax.swing.JTextField();
         lbl_gender = new javax.swing.JLabel();
         txt_gender = new javax.swing.JComboBox<>();
+        txtSearchID = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
         txtSearchName = new javax.swing.JTextField();
-        btn_searchID = new javax.swing.JButton();
-        btn_searchName = new javax.swing.JButton();
+        jTextField2 = new javax.swing.JTextField();
+        btnUpdate1 = new javax.swing.JButton();
 
         jTab_manage.setBackground(new java.awt.Color(255, 153, 153));
         jTab_manage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -350,7 +363,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Age", "Gender", "Community", "City"
+                "Patient ID", "Name", "Age", "Gender", "Community", "City"
             }
         ) {
             Class[] types = new Class [] {
@@ -372,25 +385,13 @@ public class managePatientJPanel extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 119, 1048, 139));
 
-        txtSearchID.addActionListener(new java.awt.event.ActionListener() {
+        btnEncounter.setText("Manage Encounter");
+        btnEncounter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchIDActionPerformed(evt);
+                btnEncounterActionPerformed(evt);
             }
         });
-        txtSearchID.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchIDKeyReleased(evt);
-            }
-        });
-        jPanel2.add(txtSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 63, 176, -1));
-
-        btnUpdate.setText("View & Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(791, 276, 150, -1));
+        jPanel2.add(btnEncounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 190, -1));
 
         btn_Save.setText("Save");
         btn_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -465,6 +466,21 @@ public class managePatientJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(txt_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 412, 219, -1));
 
+        txtSearchID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchIDActionPerformed(evt);
+            }
+        });
+        txtSearchID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchIDKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 176, -1));
+
+        jTextField1.setText("Search by Patient ID");
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
+
         txtSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSearchNameActionPerformed(evt);
@@ -475,23 +491,18 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 txtSearchNameKeyReleased(evt);
             }
         });
-        jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 63, 198, -1));
+        jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 198, -1));
 
-        btn_searchID.setText("Search by Patient ID");
-        btn_searchID.addActionListener(new java.awt.event.ActionListener() {
+        jTextField2.setText("Search by Patient Name");
+        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
+
+        btnUpdate1.setText("View & Update");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchIDActionPerformed(evt);
+                btnUpdate1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_searchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(242, 63, -1, -1));
-
-        btn_searchName.setText("Search by Patient Name");
-        btn_searchName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchNameActionPerformed(evt);
-            }
-        });
-        jPanel2.add(btn_searchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 63, -1, -1));
+        jPanel2.add(btnUpdate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(791, 276, 150, -1));
 
         jTab_manage.addTab("Manage Patients", jPanel2);
 
@@ -704,42 +715,35 @@ public class managePatientJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtgenderActionPerformed
 
-    private void txtSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchIDActionPerformed
+    private void btnEncounterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncounterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchIDActionPerformed
+        
+        int selectedRowIndex;
+        
+        selectedRowIndex = displayTable.getSelectedRow();
 
-    private void txtSearchIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIDKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchIDKeyReleased
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = displayTable.getSelectedRow();  // gives index of selected rows
-        if(selectedRowIndex < 0)
+        if (selectedRowIndex < 0)
         {
-            JOptionPane.showMessageDialog(this, "Select a record to view");
-            btn_Save.setEnabled(false);
-            //            return;
+            JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        else{
-            btn_Save.setEnabled(true);
-        }
+        
+        int patient_id = (int) displayTable.getValueAt(selectedRowIndex, 0);
+        Patient patient = patientlist.searchPatient(patient_id);
+        
+        ArrayList<Encounter> patientencounterhistory = encounterhistory.searchPatient(patient_id);
+        
+//        JOptionPane.showMessageDialog(null, patientencounterhistory.isEmpty());
+        manageEncounterjPanel encounterPanel = new manageEncounterjPanel(WorkArea, patient, encounterhistory, patientencounterhistory);
+        
+//        PersonPanel panel = new PersonPanel();
+        SplitPane.setRightComponent(encounterPanel);
+//        EncounterJPanel encounterPanel = new EncounterJPanel(newEncounterPersonDirectory, person, patientDirectory, encounterHistory, false);
+//        WorkArea.add("manageEncounterjPanel", manageEncounterjPanel);
+//        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
+//        cardlayout.next(WorkArea);
+//        
 
-        DefaultTableModel model = (DefaultTableModel)displayTable.getModel();
-
-        //        Doctor selectedEntry = (Doctor) model.getValueAt(selectedRowIndex, 0);  // to get any value cells from table through row and column
-
-        Patient selectedEntry = patientlist.getPatientlist().get(selectedRowIndex);
-        txt_name.setText(selectedEntry.getPersonName());
-        txt_age.setText(String.valueOf(selectedEntry.getPersonAge()));
-        txt_gender.setSelectedItem(selectedEntry.getPersonGender());
-        txt_ha.setText(selectedEntry.getHouseAddress());
-        txt_comm.setText(selectedEntry.getCommunityName());
-        txt_city.setText(selectedEntry.getCityName());
-        txt_un.setText(String.valueOf(selectedEntry.getUsername()));
-        txt_pwd.setText(selectedEntry.getPassword());
-
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }//GEN-LAST:event_btnEncounterActionPerformed
 
     private void btn_SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SaveActionPerformed
         // TODO add your handling code here:
@@ -814,23 +818,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_genderActionPerformed
 
-    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNameActionPerformed
-
-    private void txtSearchNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNameKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchNameKeyReleased
-
-    private void btn_searchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchIDActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_btn_searchIDActionPerformed
-
-    private void btn_searchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_searchNameActionPerformed
-
     private void jTab_manageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTab_manageMouseClicked
         // TODO add your handling code here:
         populateDataToTable();
@@ -848,20 +835,77 @@ public class managePatientJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTab_manageMouseEntered
 
+    private void txtSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchIDActionPerformed
+
+    private void txtSearchIDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchIDKeyReleased
+        // TODO add your handling code here:
+
+        if(!(txtSearchID.getText().isEmpty()))
+        {
+            int search = Integer.parseInt(txtSearchID.getText()); // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(regex));
+        }
+        else{
+            String search = ""; // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            //            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(search));
+        }
+    }//GEN-LAST:event_txtSearchIDKeyReleased
+
+    private void txtSearchNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchNameActionPerformed
+
+    private void txtSearchNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchNameKeyReleased
+        // TODO add your handling code here:
+
+        if(!(txtSearchName.getText().isEmpty()))
+        {
+            String search = (txtSearchName.getText()); // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            String regex = String.format("(?i)(^%s$)", search);
+            tr.setRowFilter(RowFilter.regexFilter(regex));
+        }
+        else{
+            String search = ""; // reads the search text as lower case
+            DefaultTableModel model = (DefaultTableModel) displayTable.getModel();
+            TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+            displayTable.setRowSorter(tr);
+            //            String regex = String.format("^%s$", search);
+            tr.setRowFilter(RowFilter.regexFilter(search));
+        }
+    }//GEN-LAST:event_txtSearchNameKeyReleased
+
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEncounter;
     private javax.swing.JButton btnSave;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnUpdate1;
     private javax.swing.JButton btn_Save;
-    private javax.swing.JButton btn_searchID;
-    private javax.swing.JButton btn_searchName;
     private javax.swing.JTable displayTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTab_manage;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel jtab_add;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblHA;

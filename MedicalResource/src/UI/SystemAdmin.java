@@ -45,7 +45,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         patientbtn = new javax.swing.JButton();
         doctorbtn = new javax.swing.JButton();
         hospitalbtn = new javax.swing.JButton();
-        communitybtn = new javax.swing.JButton();
+        encounterbtn = new javax.swing.JButton();
         WorkArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,11 +79,11 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
-        communitybtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        communitybtn.setText("Manage Community");
-        communitybtn.addActionListener(new java.awt.event.ActionListener() {
+        encounterbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        encounterbtn.setText("Manage Encounters");
+        encounterbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                communitybtnActionPerformed(evt);
+                encounterbtnActionPerformed(evt);
             }
         });
 
@@ -96,7 +96,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(patientbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(doctorbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(communitybtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(encounterbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(hospitalbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -108,7 +108,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(doctorbtn)
                 .addGap(26, 26, 26)
-                .addComponent(communitybtn)
+                .addComponent(encounterbtn)
                 .addGap(28, 28, 28)
                 .addComponent(hospitalbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(293, 293, 293))
@@ -148,9 +148,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_doctorbtnActionPerformed
 
-    private void communitybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_communitybtnActionPerformed
+    private void encounterbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encounterbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_communitybtnActionPerformed
+    }//GEN-LAST:event_encounterbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,9 +190,9 @@ public class SystemAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane SplitPane;
     private javax.swing.JPanel WorkArea;
-    private javax.swing.JButton communitybtn;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JButton doctorbtn;
+    private javax.swing.JButton encounterbtn;
     private javax.swing.JButton hospitalbtn;
     private javax.swing.JButton patientbtn;
     // End of variables declaration//GEN-END:variables

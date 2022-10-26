@@ -496,7 +496,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="48" y="63" width="176" height="-1"/>
+                  <AbsoluteConstraints x="50" y="70" width="176" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -719,33 +719,27 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="591" y="63" width="198" height="-1"/>
+                  <AbsoluteConstraints x="590" y="70" width="198" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_searchID">
+            <Component class="javax.swing.JTextField" name="jTextField1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search by Doctor ID"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_searchIDActionPerformed"/>
-              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="242" y="63" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="240" y="70" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_searchName">
+            <Component class="javax.swing.JTextField" name="jTextField2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search by Doctor Name"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_searchNameActionPerformed"/>
-              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="807" y="63" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="800" y="70" width="-1" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

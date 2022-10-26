@@ -44,5 +44,23 @@ public class PatientDirectory {
     public void setNewpatientlist(ArrayList<Patient> newpatientlist) {
         this.newpatientlist = newpatientlist;
     }
+    
+    
+    public Patient searchPatient(int patientid) 
+    {
+        for (Patient encounterPatient : patientlist) 
+        {
+            if (encounterPatient.getPatientID() == patientid) 
+            {
+                return encounterPatient;
+            }
+        }
+        return null;
+    }
+    
+    public void ClearTable() 
+    {
+        newpatientlist.clear();
+    }
                                                                                                                                                                                                                                                                     
 }
