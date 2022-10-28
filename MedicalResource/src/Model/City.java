@@ -8,6 +8,16 @@ package Model;
  *
  * @author Krishnakanth Naik Jarapala
  */
-class Hashmap<T0, T1> {
-    
+public class City {
+
+    String cityName;
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
 }

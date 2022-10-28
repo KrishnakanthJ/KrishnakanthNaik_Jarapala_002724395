@@ -20,7 +20,12 @@ public class Encounter extends VitalSigns {
     String city;    
     int hospital_id;
     int doctor_id;
-
+    
+    public Encounter(){
+            this.encounter_id = count;
+            count++;
+        }
+    
     public int getHospital_id() {
         return hospital_id;
     }
@@ -35,13 +40,6 @@ public class Encounter extends VitalSigns {
 
     public void setDoctor_id(int doctor_id) {
         this.doctor_id = doctor_id;
-    }
-    
-    
-    
-    Encounter(){
-        this.encounter_id = count;
-        count++;
     }
 
     public LocalDateTime getEncounter_time() {
@@ -93,6 +91,8 @@ public class Encounter extends VitalSigns {
     public void setCommunity(String community) {
         this.community = community;
     }
+
+   
     
     
 }

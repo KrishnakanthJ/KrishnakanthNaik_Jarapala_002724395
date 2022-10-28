@@ -5,6 +5,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -13,10 +14,12 @@ import java.util.ArrayList;
 public class PatientDirectory {
     private ArrayList<Patient> patientlist;
     private ArrayList<Patient> newpatientlist;
+    HashMap<String, String> credentialsMap; 
     
     public PatientDirectory(){
         this.patientlist = new ArrayList<Patient>();
         this.newpatientlist = new ArrayList<Patient>();
+        this.credentialsMap = new HashMap();
     }
     
     public Patient addNewEmployee(){
@@ -61,6 +64,25 @@ public class PatientDirectory {
     public void ClearTable() 
     {
         newpatientlist.clear();
+    }
+    
+    public HashMap<String, String> fetchPatientCredantials(){
+        
+        for (Patient patient : patientlist) 
+        {
+            credentialsMap.put(patient.getUsername(), patient.getPassword());
+        }
+        return credentialsMap;
+    }
+    
+    public boolean isUserNameExist(String username){
+        for (Patient patient : patientlist) 
+        {
+            if(patient.getUsername() == username || patient.getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
                                                                                                                                                                                                                                                                     
 }

@@ -5,6 +5,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +16,13 @@ public class DoctorDirectory {
     
     private ArrayList<Doctor> doctorlist;
     private ArrayList<Doctor> newdoctorlist;
+    HashMap<String, String> credentialsMap; 
+
     
     public DoctorDirectory(){
         this.doctorlist = new ArrayList<Doctor>();
         this.newdoctorlist = new ArrayList<Doctor>();
+        this.credentialsMap = new HashMap();
     }
     
     public ArrayList<Doctor> getNewdoctorlist() {
@@ -49,19 +53,7 @@ public class DoctorDirectory {
 
 
     }
-    
-    
-//    public void SearchPersonIDList(int personId) 
-//    {
-//        for(Person personInfo : personDirectory)
-//        {
-//           if(personId == personInfo.getPerson_id())
-//           {
-//               NewpersonDirectory.add(personInfo);
-//           }
-//        }
-//    }
-    
+     
 //    Method to search doctor by id
     public void SearchDoctorIdList(int doctorId) 
     {
@@ -72,14 +64,31 @@ public class DoctorDirectory {
                newdoctorlist.add(doctor);
            }
         }
-//        return tempdoctorlist;
-
     }
     
     
     public void ClearTable() 
     {
         doctorlist.clear();
+    }
+    
+    public HashMap<String, String> fetchPatientCredantials(){
+        
+        for (Doctor doctor : doctorlist) 
+        {
+            credentialsMap.put(doctor.getUsername(), doctor.getPassword());
+        }
+        return credentialsMap;
+    }
+    
+    public boolean isUserNameExist(String username){
+        for (Doctor doctor : doctorlist) 
+        {
+            if(doctor.getUsername() == username || doctor.getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
     
     

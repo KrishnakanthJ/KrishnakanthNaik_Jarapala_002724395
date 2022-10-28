@@ -11,8 +11,10 @@ import Model.EncounterHistory;
 import Model.Patient;
 import Model.PatientDirectory;
 import Model.Person;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,11 +38,12 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
     
     EncounterHistory encounterhistory;    
     ArrayList<Encounter> patientencounterhistory; 
-    JPanel workArea;
+    JPanel WorkArea;
     
-    public manageEncounterjPanel( WorkArea workarea, Patient patient, EncounterHistory encounterhistory, ArrayList<Encounter> patientencounterhistory)
+    public manageEncounterjPanel( JPanel workarea, Patient patient, EncounterHistory encounterhistory, ArrayList<Encounter> patientencounterhistory)
     {
         initComponents();
+        this.WorkArea = workarea;
         this.patient = patient;
         this.encounterhistory = encounterhistory;
         this.patientencounterhistory = patientencounterhistory;
@@ -49,6 +52,11 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
         txt2.setText(patient.getPersonName());
         txt3.setText(patient.getCommunityName());
         txt4.setText(patient.getCityName());
+        
+        txt1.setEnabled(false);
+        txt2.setEnabled(false);
+        txt3.setEnabled(false);
+        txt4.setEnabled(false);
         
         PopulateTable1();
 //        txt5.setText("");
@@ -108,6 +116,8 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
         lblval8 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         EncounterTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -136,12 +146,16 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(EncounterTable);
 
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 81, 1048, 139));
+
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Manage Patient Encounters");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 15, 1062, -1));
 
         lbl1.setText("Patient Id:");
+        add(lbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 266, 110, 30));
 
         txt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,12 +167,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt1KeyReleased(evt);
             }
         });
+        add(txt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 264, 238, -1));
 
         lblval1.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval1.setForeground(new java.awt.Color(255, 51, 51));
         lblval1.setText(" ");
+        add(lblval1, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 264, 438, 30));
 
         lbl2.setText("Patient Name:");
+        add(lbl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 304, 110, 30));
 
         txt2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,12 +187,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt2KeyReleased(evt);
             }
         });
+        add(txt2, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 302, 238, -1));
 
         lblval2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval2.setForeground(new java.awt.Color(255, 51, 51));
         lblval2.setText(" ");
+        add(lblval2, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 302, 438, 30));
 
         lbl3.setText("Community:");
+        add(lbl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 342, 110, 30));
 
         txt3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,12 +207,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt3KeyReleased(evt);
             }
         });
+        add(txt3, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 340, 238, -1));
 
         lblval3.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval3.setForeground(new java.awt.Color(255, 51, 51));
         lblval3.setText(" ");
+        add(lblval3, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 340, 438, 30));
 
         lbl4.setText("City");
+        add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 380, 110, 30));
 
         txt4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,12 +227,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt4KeyReleased(evt);
             }
         });
+        add(txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 378, 238, -1));
 
         lblval4.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval4.setForeground(new java.awt.Color(255, 51, 51));
         lblval4.setText(" ");
+        add(lblval4, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 378, 438, 30));
 
         lbl5.setText("Hospital ID:");
+        add(lbl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 418, 110, 30));
 
         txt5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,12 +247,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt5KeyReleased(evt);
             }
         });
+        add(txt5, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 416, 238, -1));
 
         lblval5.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval5.setForeground(new java.awt.Color(255, 51, 51));
         lblval5.setText(" ");
+        add(lblval5, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 416, 438, 30));
 
         lbl6.setText("Doctor ID:");
+        add(lbl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 456, 110, 30));
 
         txt6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,13 +267,16 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt6KeyReleased(evt);
             }
         });
+        add(txt6, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 454, 238, -1));
 
         lblval6.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval6.setForeground(new java.awt.Color(255, 51, 51));
         lblval6.setText(" ");
+        add(lblval6, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 454, 438, 30));
 
         lbl7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lbl7.setText("Blood Pressure:");
+        add(lbl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 494, 115, 30));
 
         txt7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -256,12 +288,15 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt7KeyReleased(evt);
             }
         });
+        add(txt7, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 492, 238, -1));
 
         lblval7.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval7.setForeground(new java.awt.Color(255, 51, 51));
         lblval7.setText(" ");
+        add(lblval7, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 492, 438, 30));
 
         lbl8.setText("Temperature:");
+        add(lbl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 532, 110, 30));
 
         txt8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,10 +308,12 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 txt8KeyReleased(evt);
             }
         });
+        add(txt8, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 530, 238, -1));
 
         lblval8.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblval8.setForeground(new java.awt.Color(255, 51, 51));
         lblval8.setText(" ");
+        add(lblval8, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 530, 438, 30));
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -284,144 +321,7 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1062, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval3, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval4, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval5, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval6, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval7, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbl8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23)
-                                .addComponent(txt8, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addComponent(lblval8, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(120, 120, 120))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(466, 466, 466)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblval7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbl7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(lbl8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblval8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(30, 30, 30))
-        );
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 610, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt1ActionPerformed
@@ -473,6 +373,7 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
 
     private void txt5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt5KeyReleased
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txt5KeyReleased
 
     private void txt6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt6ActionPerformed
@@ -501,39 +402,33 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-//        String name = txtname.getText();
-//        String gender = txtgender.getSelectedItem().toString();
-//        int age = Integer.parseInt(txtage.getText());
-//        String houseaddress = txtHA.getText();
-//        String community = txtcomm.getText();
-//        String city = txtcity.getText();
-//        String username = txtun.getText();
-//        String pwd = txtpwd.getText();
-//
-//        if(error_flag == 1 || lblnameval.getText() != "" || lblHAval.getText()!="" || lblcommval.getText() != "" || lblcityval.getText() != "" || lblunval.getText() != "" || lblpwdval.getText() != ""){
-//            JOptionPane.showMessageDialog(this, "Failed!, Please fill Information Correctly");
-//        }
-//        else{
-//            Patient doc = patientlist.addNewEmployee();
-//            doc.setPersonName(name);
-//            doc.setPersonGender(gender);
-//            doc.setPersonAge(age);
-//            doc.setHouseAddress(houseaddress);
-//            doc.setCommunityName(community);
-//            doc.setCityName(city);
-//            doc.setUsername(username);
-//            doc.setPassword(pwd);
-//            JOptionPane.showMessageDialog(this, "Patient created successfully!");
-//
-//            txtname.setText("");
-//            txtgender.setSelectedIndex(0);
-//            txtage.setText("");
-//            txtHA.setText("");
-//            txtcomm.setText("");
-//            txtcity.setText("");
-//            txtun.setText("");
-//            txtpwd.setText("");
+        Encounter encounter = encounterhistory.AddNewEncounter();
         
+        if(lblval8.getText().equals(" ") && lblval7.getText().equals(" ") && lblval6.getText().equals(" ") && lblval5.getText().equals(" "))
+        {   
+                  
+            encounter.setPatientID(patient.getPatientID());
+            encounter.setPatient_name(patient.getPersonName());
+            encounter.setCity(patient.getCityName());
+            encounter.setCommunity(patient.getCommunityName());
+            encounter.setHospital_id(Integer.parseInt(txt5.getText()));
+            encounter.setEncounter_time(LocalDateTime.now());
+            encounter.setDoctor_id(Integer.parseInt(txt6.getText()));
+            encounter.setBloodPressure(Double.parseDouble(txt7.getText()));
+            encounter.setTemperature(Double.parseDouble(txt8.getText()));
+
+            PopulateTable1();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Enter Correct Data and try again");
+            return;
+        }
+
+        txt5.setText("");
+        txt6.setText("");
+        txt7.setText("");
+        txt8.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
     
     private void PopulateTable() {

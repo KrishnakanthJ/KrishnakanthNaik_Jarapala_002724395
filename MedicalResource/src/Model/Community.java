@@ -8,10 +8,9 @@ package Model;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class Community{
+public class Community extends City{
     
     String communityName;
-    String cityName;
 
     public String getCommunityName() {
         return communityName;
@@ -19,14 +18,6 @@ public class Community{
 
     public void setCommunityName(String CommunityName) {
         this.communityName = CommunityName;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
     }
     
     

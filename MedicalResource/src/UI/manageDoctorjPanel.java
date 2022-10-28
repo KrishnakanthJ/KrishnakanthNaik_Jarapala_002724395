@@ -304,7 +304,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Employee ID", "Name", "Age", "Gender", "Community", "City"
+                "Doctor ID", "Name", "Age", "Gender", "Community", "City"
             }
         ) {
             Class[] types = new Class [] {
@@ -434,7 +434,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         jTextField1.setText("Search by Doctor ID");
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
-        jTextField2.setText("Search by Doctor Name");
+        jTextField2.setText("Search by Doctor Attributes");
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
 
         jTab_manage.addTab("Manage Doctors", jPanel2);
@@ -655,7 +655,7 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         String PatterN = "^[0-9 +()-]{1,3}$";
         Pattern pattern = Pattern.compile(PatterN);
         Matcher patternmatch = pattern.matcher(txtage.getText());
-        if(!patternmatch.matches())
+        if(!patternmatch.matches() || Integer.parseInt(txtage.getText()) > 120)
         {
             lblageval.setText("Wrong Input, Please Enter Valid Age.");
             JOptionPane.showMessageDialog(this, "Please Enter Valid Age!");
@@ -668,6 +668,8 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
             lblageval.setText("");
             error_flag = 0;
         }
+        
+        
     }//GEN-LAST:event_txtageKeyReleased
 
     private void txtageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtageActionPerformed
@@ -751,6 +753,18 @@ public class manageDoctorjPanel extends javax.swing.JPanel {
         }
         else
         {
+            lblunval.setText("");
+            error_flag = 0;
+        }
+        
+        boolean isExist = doctorlist.isUserNameExist(txtun.getText());
+
+        if(isExist){
+            lblunval.setText("UserName Already Taken.");
+            error_flag = 1;
+
+        }
+        else{
             lblunval.setText("");
             error_flag = 0;
         }

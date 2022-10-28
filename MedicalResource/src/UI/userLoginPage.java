@@ -4,6 +4,14 @@
  */
 package UI;
 
+import Model.CommunityDirectory;
+import Model.Doctor;
+import Model.DoctorDirectory;
+import Model.EncounterHistory;
+import Model.Hospital;
+import Model.HospitalDirectory;
+import Model.Patient;
+import Model.PatientDirectory;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,14 +19,40 @@ import javax.swing.JOptionPane;
  * @author Krishnakanth Naik Jarapala
  */
 public class userLoginPage extends javax.swing.JFrame {
-
+    PatientDirectory patientlist;
+    Patient patient;
+    
+    DoctorDirectory doctorlist;
+    Doctor doctor;
+    
+    EncounterHistory encounterhistory;
+    
+    HospitalDirectory hospitallist;
+    Hospital hospital;
+    
+    CommunityDirectory communitylist;
+    
     /**
      * Creates new form userLoginPage
      */
     public userLoginPage() {
         initComponents();
+        this.patientlist = new PatientDirectory();
+        this.doctorlist = new DoctorDirectory();
+        this.encounterhistory = new EncounterHistory();
+        this.hospitallist = new HospitalDirectory();
+        this.communitylist = new CommunityDirectory();
     }
 
+    public userLoginPage(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, HospitalDirectory hospitallist, CommunityDirectory communitylist) {
+        initComponents();
+        this.patientlist = patientlist;
+        this.doctorlist = doctorlist;
+        this.encounterhistory = encounterhistory;
+        this.hospitallist = hospitallist;
+        this.communitylist = communitylist;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -165,9 +199,14 @@ public class userLoginPage extends javax.swing.JFrame {
         String role = comboBox_roleMenu.getSelectedItem().toString();
         if((role.equals("System Admin")) && (txt_username.getText().equals("user"))  && (pass_password.getText().equals("user"))){
             this.setVisible(false);
-            SystemAdmin sa = new SystemAdmin();
+            SystemAdmin sa = new SystemAdmin(patientlist, doctorlist, encounterhistory, hospitallist, communitylist);
 //            JOptionPane.showMessageDialog(this, "USER Credentials are correct!");
             sa.setVisible(true);
+        }
+        else if(role.equals("Community Admin") && (txt_username.getText().equals("comm"))  && (pass_password.getText().equals("comm"))){
+            this.setVisible(false);
+            CommunityAdminPage ca = new CommunityAdminPage(patientlist, doctorlist, encounterhistory, hospitallist, communitylist);
+            ca.setVisible(true);        
         }
         else{
             JOptionPane.showMessageDialog(this, "Invalid Credentials");

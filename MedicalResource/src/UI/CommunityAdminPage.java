@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Model.Community;
 import Model.CommunityDirectory;
 import Model.Doctor;
 import Model.DoctorDirectory;
@@ -18,7 +19,7 @@ import java.awt.CardLayout;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class SystemAdmin extends javax.swing.JFrame {
+public class CommunityAdminPage extends javax.swing.JFrame {
     
     PatientDirectory patientlist;
     Patient patient;
@@ -27,20 +28,20 @@ public class SystemAdmin extends javax.swing.JFrame {
     EncounterHistory encounterhistory;
     HospitalDirectory hospitallist;
     Hospital hospital;
-    
     CommunityDirectory communitylist;
+    Community community;
+    
     /**
      * Creates new form SystemAdmin
      */
-    public SystemAdmin(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, HospitalDirectory hospitallist, CommunityDirectory communitylist) {
+    public CommunityAdminPage(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, HospitalDirectory hospitallist, CommunityDirectory communitylist) {
         initComponents();
         this.patientlist = patientlist;
-        this.patient = new Patient();
         this.doctorlist = doctorlist;
-        this.doctor = new Doctor();
         this.encounterhistory = encounterhistory;
         this.hospitallist = hospitallist;
         this.communitylist = communitylist;
+        this.community = community;
     }
 
     /**
@@ -54,10 +55,8 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         SplitPane = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        patientbtn = new javax.swing.JButton();
-        doctorbtn = new javax.swing.JButton();
-        hospitalbtn = new javax.swing.JButton();
-        encounterbtn = new javax.swing.JButton();
+        hosbtn = new javax.swing.JButton();
+        commbtn = new javax.swing.JButton();
         btnlogout = new javax.swing.JButton();
         WorkArea = new javax.swing.JPanel();
 
@@ -68,35 +67,19 @@ public class SystemAdmin extends javax.swing.JFrame {
         controlPanel.setForeground(new java.awt.Color(102, 102, 0));
         controlPanel.setPreferredSize(new java.awt.Dimension(200, 700));
 
-        patientbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        patientbtn.setText("Manage Patient");
-        patientbtn.addActionListener(new java.awt.event.ActionListener() {
+        hosbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        hosbtn.setText("Manage Houses");
+        hosbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientbtnActionPerformed(evt);
+                hosbtnActionPerformed(evt);
             }
         });
 
-        doctorbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        doctorbtn.setText("Manage Doctor");
-        doctorbtn.addActionListener(new java.awt.event.ActionListener() {
+        commbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        commbtn.setText("Manage Community");
+        commbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorbtnActionPerformed(evt);
-            }
-        });
-
-        hospitalbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        hospitalbtn.setText("Manage Hospitals");
-        hospitalbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hospitalbtnActionPerformed(evt);
-            }
-        });
-
-        encounterbtn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        encounterbtn.setText("Manage Encounters");
-        encounterbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                encounterbtnActionPerformed(evt);
+                commbtnActionPerformed(evt);
             }
         });
 
@@ -114,35 +97,28 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(patientbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(doctorbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(encounterbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hospitalbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(commbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addComponent(btnlogout)
+                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hosbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnlogout))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnlogout, hospitalbtn});
+        controlPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnlogout, hosbtn});
 
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(241, 241, 241)
-                .addComponent(patientbtn)
-                .addGap(30, 30, 30)
-                .addComponent(doctorbtn)
-                .addGap(26, 26, 26)
-                .addComponent(encounterbtn)
-                .addGap(28, 28, 28)
-                .addComponent(hospitalbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
-                .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addGap(283, 283, 283)
+                .addComponent(commbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
+                .addGap(78, 78, 78)
+                .addComponent(hosbtn)
+                .addGap(248, 248, 248)
+                .addComponent(btnlogout)
+                .addGap(20, 20, 20))
         );
-
-        controlPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnlogout, hospitalbtn});
 
         SplitPane.setLeftComponent(controlPanel);
 
@@ -156,44 +132,29 @@ public class SystemAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void hospitalbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitalbtnActionPerformed
+    private void commbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commbtnActionPerformed
         // TODO add your handling code here:
-        manageHospitaljPanel mp = new manageHospitaljPanel(hospitallist);
-//        SplitPane.setRightComponent(mp);
-//        AddHospitaljPanel hp = new AddHospitaljPanel(HospitalDirectory hospitallist);
-        WorkArea.add("manageHospitaljPanel", mp);
+        manageCommunityjPanel mp = new manageCommunityjPanel(communitylist, patientlist);
+        WorkArea.add("manageCommunityjPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
         
-    }//GEN-LAST:event_hospitalbtnActionPerformed
+    }//GEN-LAST:event_commbtnActionPerformed
 
-    private void patientbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientbtnActionPerformed
+    private void hosbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hosbtnActionPerformed
         // TODO add your handling code here:
-        managePatientJPanel mp = new managePatientJPanel(WorkArea, patientlist, encounterhistory);
-        WorkArea.add("managePatientJPanel", mp);
+        manageHousesjPanel mp = new manageHousesjPanel( communitylist, patientlist);
+        WorkArea.add("manageHousesjPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
 //        SplitPane.setRightComponent(mp);
-    }//GEN-LAST:event_patientbtnActionPerformed
-
-    private void doctorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorbtnActionPerformed
-        // TODO add your handling code here:
-        manageDoctorjPanel mp = new manageDoctorjPanel(doctorlist);
-        WorkArea.add("manageDoctorjPanel", mp);
-        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
-        cardlayout.next(WorkArea);
-        
-    }//GEN-LAST:event_doctorbtnActionPerformed
-
-    private void encounterbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encounterbtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_encounterbtnActionPerformed
+    }//GEN-LAST:event_hosbtnActionPerformed
 
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         userLoginPage ulp = new userLoginPage(patientlist, doctorlist, encounterhistory, hospitallist, communitylist);
-        ulp.setVisible(true);   
+        ulp.setVisible(true);
     }//GEN-LAST:event_btnlogoutActionPerformed
 
     /**
@@ -236,10 +197,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JSplitPane SplitPane;
     private javax.swing.JPanel WorkArea;
     private javax.swing.JButton btnlogout;
+    private javax.swing.JButton commbtn;
     private javax.swing.JPanel controlPanel;
-    private javax.swing.JButton doctorbtn;
-    private javax.swing.JButton encounterbtn;
-    private javax.swing.JButton hospitalbtn;
-    private javax.swing.JButton patientbtn;
+    private javax.swing.JButton hosbtn;
     // End of variables declaration//GEN-END:variables
 }

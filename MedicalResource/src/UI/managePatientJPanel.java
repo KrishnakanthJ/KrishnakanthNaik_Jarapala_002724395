@@ -31,19 +31,26 @@ public class managePatientJPanel extends javax.swing.JPanel {
     Patient patient;
     EncounterHistory encounterhistory;
     EncounterHistory patientencounterhistory;
-    JPanel workArea;
+    JPanel WorkArea;
 
     int error_flag = 0;
     
     /**
      * Creates new form managePatientJPanel
      */
-    public managePatientJPanel(PatientDirectory patientlist) {
+    public managePatientJPanel(JPanel workArea, PatientDirectory patientlist, EncounterHistory encounterhistory) {
         initComponents();
+        this.WorkArea = workArea;
         this.patientlist = patientlist;
         this.newpatientlist = new PatientDirectory();
-        this.encounterhistory = new EncounterHistory();
+        this.encounterhistory = encounterhistory;
         this.patientencounterhistory = new EncounterHistory();
+        this.patient = new Patient();
+        
+//        while(true){
+//            txtgender.removeAllItems();
+//            txt
+//        }
     }
 
     /**
@@ -493,7 +500,12 @@ public class managePatientJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 198, -1));
 
-        jTextField2.setText("Search by Patient Name");
+        jTextField2.setText("Search by Patient Attributes");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
 
         btnUpdate1.setText("View & Update");
@@ -559,11 +571,11 @@ public class managePatientJPanel extends javax.swing.JPanel {
         String PatterN = "^[0-9 +()-]{1,3}$";
         Pattern pattern = Pattern.compile(PatterN);
         Matcher patternmatch = pattern.matcher(txtage.getText());
-        if(!patternmatch.matches())
+        if(!patternmatch.matches() || Integer.parseInt(txtage.getText()) > 120)
         {
             lblageval.setText("Wrong Input, Please Enter Valid Age.");
-            JOptionPane.showMessageDialog(this, "Please Enter Valid Age!");
-
+//            JOptionPane.showMessageDialog(this, "Please Enter Valid Age!");
+            txtage.setText("");
             error_flag = 1;
 
         }
@@ -649,6 +661,17 @@ public class managePatientJPanel extends javax.swing.JPanel {
         {
             lblunval.setText("");
             error_flag = 0;
+        }
+        
+//        Checking the username exists in the patientdirectory.
+
+        boolean isExist = patientlist.isUserNameExist(txtun.getText());
+
+        if(isExist){
+            lblunval.setText("UserName Already Taken.");
+        }
+        else{
+            lblunval.setText("");
         }
     }//GEN-LAST:event_txtunKeyReleased
 
@@ -736,11 +759,11 @@ public class managePatientJPanel extends javax.swing.JPanel {
         manageEncounterjPanel encounterPanel = new manageEncounterjPanel(WorkArea, patient, encounterhistory, patientencounterhistory);
         
 //        PersonPanel panel = new PersonPanel();
-        SplitPane.setRightComponent(encounterPanel);
+//        SplitPane.setRightComponent(encounterPanel);
 //        EncounterJPanel encounterPanel = new EncounterJPanel(newEncounterPersonDirectory, person, patientDirectory, encounterHistory, false);
-//        WorkArea.add("manageEncounterjPanel", manageEncounterjPanel);
-//        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
-//        cardlayout.next(WorkArea);
+        WorkArea.add("manageEncounterjPanel", encounterPanel);
+        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
+        cardlayout.next(WorkArea);
 //        
 
     }//GEN-LAST:event_btnEncounterActionPerformed
@@ -889,7 +912,35 @@ public class managePatientJPanel extends javax.swing.JPanel {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
+        int selectedRowIndex = displayTable.getSelectedRow();  // gives index of selected rows
+        if(selectedRowIndex < 0)
+        {
+            JOptionPane.showMessageDialog(this, "Select a record to view");
+            btn_Save.setEnabled(false);
+//            return;
+        }
+        else{
+            btn_Save.setEnabled(true);
+        }
+        
+        DefaultTableModel model = (DefaultTableModel)displayTable.getModel();
+        
+        //        Doctor selectedEntry = (Doctor) model.getValueAt(selectedRowIndex, 0);  // to get any value cells from table through row and column
+
+        Patient selectedEntry = patientlist.getPatientlist().get(selectedRowIndex);
+        txt_name.setText(selectedEntry.getPersonName());
+        txt_age.setText(String.valueOf(selectedEntry.getPersonAge()));
+        txt_gender.setSelectedItem(selectedEntry.getPersonGender());
+        txt_ha.setText(selectedEntry.getHouseAddress());
+        txt_comm.setText(selectedEntry.getCommunityName());
+        txt_city.setText(selectedEntry.getCityName());
+        txt_un.setText(String.valueOf(selectedEntry.getUsername()));
+        txt_pwd.setText(selectedEntry.getPassword());
     }//GEN-LAST:event_btnUpdate1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
