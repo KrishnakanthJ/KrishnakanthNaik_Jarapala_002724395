@@ -19,7 +19,4 @@ public class Community extends City{
     public void setCommunityName(String CommunityName) {
         this.communityName = CommunityName;
     }
-    
-    
-    
 }

@@ -6,6 +6,8 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,7 +17,8 @@ public class PatientDirectory {
     private ArrayList<Patient> patientlist;
     private ArrayList<Patient> newpatientlist;
     HashMap<String, String> credentialsMap; 
-    
+    Set<String> unique_communities = new HashSet<String>();
+
     public PatientDirectory(){
         this.patientlist = new ArrayList<Patient>();
         this.newpatientlist = new ArrayList<Patient>();
@@ -83,6 +86,14 @@ public class PatientDirectory {
             }
         }
         return false;
+    }
+    
+    public Set fetchUniqueCommunities(){
+
+        for(Patient patient: patientlist){
+                unique_communities.add(patient.getCommunityName());
+        }
+        return unique_communities;
     }
                                                                                                                                                                                                                                                                     
 }

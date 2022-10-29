@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Model.CommunityDirectory;
 import Model.Doctor;
 import Model.Encounter;
 import Model.EncounterHistory;
@@ -12,6 +13,8 @@ import Model.PatientDirectory;
 import Model.Person;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import javax.swing.JOptionPane;
@@ -31,6 +34,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
     Patient patient;
     EncounterHistory encounterhistory;
     EncounterHistory patientencounterhistory;
+    CommunityDirectory communitylist;
     JPanel WorkArea;
 
     int error_flag = 0;
@@ -38,7 +42,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
     /**
      * Creates new form managePatientJPanel
      */
-    public managePatientJPanel(JPanel workArea, PatientDirectory patientlist, EncounterHistory encounterhistory) {
+    public managePatientJPanel(JPanel workArea, PatientDirectory patientlist, EncounterHistory encounterhistory, CommunityDirectory communitylist) {
         initComponents();
         this.WorkArea = workArea;
         this.patientlist = patientlist;
@@ -46,11 +50,18 @@ public class managePatientJPanel extends javax.swing.JPanel {
         this.encounterhistory = encounterhistory;
         this.patientencounterhistory = new EncounterHistory();
         this.patient = new Patient();
+        this.communitylist = communitylist;
+        Set<String> unique_communities = new HashSet<String>();
+
+        unique_communities = communitylist.fetchUniqueCommunities();
         
-//        while(true){
-//            txtgender.removeAllItems();
-//            txt
-//        }
+        for(String s: unique_communities){
+            txtcomm.addItem(s);
+        }
+        for(String s: unique_communities){
+            txt_comm.addItem(s);
+        }
+        
     }
 
     /**
@@ -124,7 +135,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txtHA = new javax.swing.JTextField();
         lblHAval = new javax.swing.JLabel();
         lblcomm = new javax.swing.JLabel();
-        txtcomm = new javax.swing.JTextField();
         lblcommval = new javax.swing.JLabel();
         lblCity = new javax.swing.JLabel();
         txtcity = new javax.swing.JTextField();
@@ -138,6 +148,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         lblgender = new javax.swing.JLabel();
         txtgender = new javax.swing.JComboBox<>();
+        txtcomm = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayTable = new javax.swing.JTable();
@@ -150,7 +161,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txt_name = new javax.swing.JTextField();
         txt_age = new javax.swing.JTextField();
         txt_ha = new javax.swing.JTextField();
-        txt_comm = new javax.swing.JTextField();
         txt_city = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lbl_age = new javax.swing.JLabel();
@@ -166,6 +176,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txtSearchName = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         btnUpdate1 = new javax.swing.JButton();
+        txt_comm = new javax.swing.JComboBox<>();
 
         jTab_manage.setBackground(new java.awt.Color(255, 153, 153));
         jTab_manage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,18 +273,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
         lblcomm.setText("Community:");
         jtab_add.add(lblcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(253, 360, 110, 30));
 
-        txtcomm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcommActionPerformed(evt);
-            }
-        });
-        txtcomm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtcommKeyReleased(evt);
-            }
-        });
-        jtab_add.add(txtcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 358, 238, -1));
-
         lblcommval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblcommval.setForeground(new java.awt.Color(255, 51, 51));
         lblcommval.setText(" ");
@@ -357,10 +356,22 @@ public class managePatientJPanel extends javax.swing.JPanel {
         });
         jtab_add.add(txtgender, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 213, 238, -1));
 
+        txtcomm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brookline", "Fenway", "Boylston", "Mission Hill" }));
+        txtcomm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcommActionPerformed(evt);
+            }
+        });
+        txtcomm.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtcommKeyReleased(evt);
+            }
+        });
+        jtab_add.add(txtcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 230, -1));
+
         jTab_manage.addTab("Add New Patient", jtab_add);
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         displayTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -390,15 +401,12 @@ public class managePatientJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(displayTable);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 119, 1048, 139));
-
         btnEncounter.setText("Manage Encounter");
         btnEncounter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncounterActionPerformed(evt);
             }
         });
-        jPanel2.add(btnEncounter, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 190, -1));
 
         btn_Save.setText("Save");
         btn_Save.addActionListener(new java.awt.event.ActionListener() {
@@ -406,10 +414,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 btn_SaveActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(519, 580, 110, -1));
 
         lbl_comm.setText("Community:");
-        jPanel2.add(lbl_comm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 463, 132, -1));
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -417,53 +423,37 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 276, -1, -1));
 
         lbl_city.setText("City:");
-        jPanel2.add(lbl_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 516, 111, -1));
 
         lbl_name.setText("Name:");
-        jPanel2.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 316, 111, -1));
 
         txt_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nameActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 313, 219, -1));
-        jPanel2.add(txt_age, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 361, 219, -1));
 
         txt_ha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_haActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_ha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 409, 219, -1));
-        jPanel2.add(txt_comm, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 219, -1));
-        jPanel2.add(txt_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 219, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Manage Patient Details");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 16, 1062, -1));
 
         lbl_age.setText("Age:");
-        jPanel2.add(lbl_age, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 364, 111, -1));
 
         lbl_HA.setText("House Address:");
-        jPanel2.add(lbl_HA, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 412, 132, -1));
 
         lbl_un.setText("User Name:");
-        jPanel2.add(lbl_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 455, 111, -1));
 
         lbl_pwd.setText("Password:");
-        jPanel2.add(lbl_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 516, 111, -1));
-        jPanel2.add(txt_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 460, 219, -1));
-        jPanel2.add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 510, 219, -1));
 
         lbl_gender.setText("Gender:");
-        jPanel2.add(lbl_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 414, 111, 20));
 
         txt_gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         txt_gender.addActionListener(new java.awt.event.ActionListener() {
@@ -471,7 +461,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 txt_genderActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 412, 219, -1));
 
         txtSearchID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -483,10 +472,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 txtSearchIDKeyReleased(evt);
             }
         });
-        jPanel2.add(txtSearchID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 176, -1));
 
         jTextField1.setText("Search by Patient ID");
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
         txtSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -498,7 +485,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 txtSearchNameKeyReleased(evt);
             }
         });
-        jPanel2.add(txtSearchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 70, 198, -1));
 
         jTextField2.setText("Search by Patient Attributes");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -506,7 +492,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 jTextField2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
 
         btnUpdate1.setText("View & Update");
         btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
@@ -514,7 +499,149 @@ public class managePatientJPanel extends javax.swing.JPanel {
                 btnUpdate1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnUpdate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(791, 276, 150, -1));
+
+        txt_comm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brookline", "Fenway", "Boylston", "Mission Hill" }));
+        txt_comm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_commActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1062, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(txtSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180)
+                .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(btnEncounter, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(571, 571, 571)
+                .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnDelete))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(lbl_name, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(lbl_age, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(txt_age, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(lbl_HA, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txt_ha, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(lbl_gender, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(txt_gender, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(519, 519, 519)
+                .addComponent(btn_Save, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_comm, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_comm, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_city, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_un, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(txt_un, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearchID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(btnEncounter))
+                    .addComponent(btnUpdate1)
+                    .addComponent(btnDelete))
+                .addGap(3, 3, 3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_name))
+                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_age))
+                    .addComponent(txt_age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lbl_HA))
+                    .addComponent(txt_ha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(lbl_gender, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(txt_gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_comm)
+                            .addComponent(txt_comm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbl_un)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(txt_un, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_pwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_city)
+                            .addComponent(lbl_pwd))))
+                .addGap(40, 40, 40)
+                .addComponent(btn_Save))
+        );
 
         jTab_manage.addTab("Manage Patients", jPanel2);
 
@@ -605,25 +732,6 @@ public class managePatientJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtHAKeyReleased
 
-    private void txtcommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcommActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcommActionPerformed
-
-    private void txtcommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcommKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 '/:]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtcomm.getText());
-        if(!patternmatch.matches())
-        {
-            lblcommval.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblcommval.setText("");
-        }
-    }//GEN-LAST:event_txtcommKeyReleased
-
     private void txtcityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcityActionPerformed
@@ -702,15 +810,17 @@ public class managePatientJPanel extends javax.swing.JPanel {
         String gender = txtgender.getSelectedItem().toString();
         int age = Integer.parseInt(txtage.getText());
         String houseaddress = txtHA.getText();
-        String community = txtcomm.getText();
+        String community = txtcomm.getSelectedItem().toString();
         String city = txtcity.getText();
         String username = txtun.getText();
         String pwd = txtpwd.getText();
 
         if(error_flag == 1 || lblnameval.getText() != "" || lblHAval.getText()!="" || lblcommval.getText() != "" || lblcityval.getText() != "" || lblunval.getText() != "" || lblpwdval.getText() != ""){
             JOptionPane.showMessageDialog(this, "Failed!, Please fill Information Correctly");
+            btnSave.setEnabled(false);
         }
         else{
+            btnSave.setEnabled(true);
             Patient doc = patientlist.addNewEmployee();
             doc.setPersonName(name);
             doc.setPersonGender(gender);
@@ -726,7 +836,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
             txtgender.setSelectedIndex(0);
             txtage.setText("");
             txtHA.setText("");
-            txtcomm.setText("");
+            txtcomm.setSelectedIndex(0);
             txtcity.setText("");
             txtun.setText("");
             txtpwd.setText("");
@@ -784,7 +894,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         //        Doctor selectedEntry = (Doctor) model.getValueAt(selectedRowIndex, 0);
         //        System.out.println("name"+txtEmployeeName.getText());
 
-        if(txt_name.getText().isEmpty() || txt_age.getText().isEmpty() || txt_ha.getText().isEmpty() || txt_comm.getText().isEmpty() || txt_city.getText().isEmpty() || txt_un.getText().isEmpty() || txt_pwd.getText().isEmpty()){
+        if(txt_name.getText().isEmpty() || txt_age.getText().isEmpty() || txt_ha.getText().isEmpty() || txt_comm.getSelectedItem().toString().isEmpty() || txt_city.getText().isEmpty() || txt_un.getText().isEmpty() || txt_pwd.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill Information Correctly");
         }
         else{
@@ -792,7 +902,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
             selectedEntry.setPersonAge(Integer.parseInt(txt_age.getText()));
             selectedEntry.setPersonGender(txt_gender.getSelectedItem().toString());
             selectedEntry.setHouseAddress((txt_ha.getText()));
-            selectedEntry.setCommunityName(txt_comm.getText());
+            selectedEntry.setCommunityName(txt_comm.getSelectedItem().toString());
             selectedEntry.setCityName(txt_city.getText());
             selectedEntry.setUsername(txt_un.getText());
             selectedEntry.setPassword(txt_pwd.getText());
@@ -803,7 +913,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
             txt_age.setText("");
             txt_gender.setSelectedIndex(-1);
             txt_ha.setText("");
-            txt_comm.setText("");
+            txt_comm.setSelectedIndex(-1);
             txt_city.setText("");
             txt_un.setText("");
             txt_pwd.setText("");
@@ -848,7 +958,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txt_age.setText("");
         txt_gender.setSelectedIndex(-1);
         txt_ha.setText("");
-        txt_comm.setText("");
+        txt_comm.setSelectedIndex(-1);
         txt_city.setText("");
         txt_un.setText("");
         txt_pwd.setText("");
@@ -932,7 +1042,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txt_age.setText(String.valueOf(selectedEntry.getPersonAge()));
         txt_gender.setSelectedItem(selectedEntry.getPersonGender());
         txt_ha.setText(selectedEntry.getHouseAddress());
-        txt_comm.setText(selectedEntry.getCommunityName());
+        txt_comm.setSelectedItem(selectedEntry.getCommunityName());
         txt_city.setText(selectedEntry.getCityName());
         txt_un.setText(String.valueOf(selectedEntry.getUsername()));
         txt_pwd.setText(selectedEntry.getPassword());
@@ -941,6 +1051,24 @@ public class managePatientJPanel extends javax.swing.JPanel {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void txtcommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcommActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcommActionPerformed
+
+    private void txt_commActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_commActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_commActionPerformed
+
+    private void txtcommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcommKeyReleased
+        // TODO add your handling code here:
+        if(txtcomm.getSelectedItem().equals(null)){
+            lblcommval.setText("Please select a community");
+        }
+        else{
+            lblcommval.setText("");
+        }
+    }//GEN-LAST:event_txtcommKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -987,7 +1115,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearchName;
     private javax.swing.JTextField txt_age;
     private javax.swing.JTextField txt_city;
-    private javax.swing.JTextField txt_comm;
+    private javax.swing.JComboBox<String> txt_comm;
     private javax.swing.JComboBox<String> txt_gender;
     private javax.swing.JTextField txt_ha;
     private javax.swing.JTextField txt_name;
@@ -995,7 +1123,7 @@ public class managePatientJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txt_un;
     private javax.swing.JTextField txtage;
     private javax.swing.JTextField txtcity;
-    private javax.swing.JTextField txtcomm;
+    private javax.swing.JComboBox<String> txtcomm;
     private javax.swing.JComboBox<String> txtgender;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtpwd;

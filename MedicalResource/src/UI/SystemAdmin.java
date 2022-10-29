@@ -169,7 +169,7 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void patientbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientbtnActionPerformed
         // TODO add your handling code here:
-        managePatientJPanel mp = new managePatientJPanel(WorkArea, patientlist, encounterhistory);
+        managePatientJPanel mp = new managePatientJPanel(WorkArea, patientlist, encounterhistory, communitylist);
         WorkArea.add("managePatientJPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
