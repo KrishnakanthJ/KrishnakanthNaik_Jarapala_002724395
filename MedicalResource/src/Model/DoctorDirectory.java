@@ -21,6 +21,7 @@ public class DoctorDirectory {
     
     public DoctorDirectory(){
         this.doctorlist = new ArrayList<Doctor>();
+        this.credentialsMap = new HashMap();
         this.newdoctorlist = new ArrayList<Doctor>();
         this.credentialsMap = new HashMap();
     }
@@ -41,25 +42,25 @@ public class DoctorDirectory {
         this.doctorlist = doctorlist;
     }
     
-    public Doctor addNewEmployee(){
-        Doctor newEmployee = new Doctor();
-        doctorlist.add(newEmployee);
-        return newEmployee;
+    public Doctor addNewDoctor(){
+        Doctor newDoc = new Doctor();
+        doctorlist.add(newDoc);
+        return newDoc;
         
     }
 
-    public void deleteProfile(Doctor ei) {
+    public void deleteDoctor(Doctor ei) {
             doctorlist.remove(ei);
 
 
     }
      
 //    Method to search doctor by id
-    public void SearchDoctorIdList(int doctorId) 
+    public void SearchDoctorName(String doctorname) 
     {
         for(Doctor doctor : doctorlist)
         {
-           if(doctorId == doctor.getDoctorID())
+           if(doctorname == doctor.getDoctorName())
            {               
                newdoctorlist.add(doctor);
            }

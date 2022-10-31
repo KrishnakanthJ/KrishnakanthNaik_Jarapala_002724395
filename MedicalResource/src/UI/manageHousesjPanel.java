@@ -4,16 +4,20 @@
  */
 package UI;
 
+import Model.City;
+import Model.CityDirectory;
 import Model.Community;
 import Model.CommunityDirectory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Model.HospitalDirectory;
 import Model.Hospital;
+import Model.House;
 import Model.Patient;
 import Model.PatientDirectory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 //import medicalresourcemanagement.Patient;
 
 /**
@@ -23,18 +27,29 @@ import java.util.regex.Pattern;
 public class manageHousesjPanel extends javax.swing.JPanel {
 
     CommunityDirectory communitylist;
-    PatientDirectory patientlists;
+    CityDirectory citylist;
     private String checkError;
+    City chosenCity;
+    Community chosenComm;
+    House house;
     /**
      * Creates new form AddHospital
      */
-    public manageHousesjPanel(CommunityDirectory communitylist, PatientDirectory patientlist) {
+    public manageHousesjPanel(CityDirectory citylist, CommunityDirectory communitylist) {
         initComponents();
         this.communitylist = communitylist;
-        this.patientlists = patientlist;
+        this.citylist = citylist;
+//        btnAdd.setEnabled(false);
+        
+        lblCityVal.setText("Select a City.");
+        lblCommval.setText("Select a Community.");
+        
+        
+        populatecity();
         btnUpdate.setEnabled(false);
         
-        populateDataToTable();
+        
+//        populateDataToTable();
         
     }
 
@@ -49,87 +64,34 @@ public class manageHousesjPanel extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cbCommunity = new javax.swing.JTextField();
-        btnView = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        lblCommVal = new javax.swing.JLabel();
-        lblCityVal = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        lblHAval = new javax.swing.JLabel();
         txtHA = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        lblHAVal = new javax.swing.JLabel();
+        lblCityVal = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblCommval = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblComm = new javax.swing.JTable();
+        tblHouse = new javax.swing.JTable();
+        citydropdown = new javax.swing.JComboBox<>();
+        commdropdown = new javax.swing.JComboBox<>();
+        srch = new javax.swing.JTextField();
+        ddcom = new javax.swing.JComboBox<>();
+        ddci = new javax.swing.JComboBox<>();
+        btnSearch = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
         setPreferredSize(new java.awt.Dimension(900, 700));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Community :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, 100, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, 100, -1));
 
         jLabel3.setText("City :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 440, -1, -1));
-
-        cbCommunity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCommunityActionPerformed(evt);
-            }
-        });
-        cbCommunity.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                cbCommunityKeyReleased(evt);
-            }
-        });
-        add(cbCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 155, -1));
-
-        btnView.setText("View & Update");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, -1, -1));
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 530, -1, -1));
-
-        jLabel6.setBackground(new java.awt.Color(255, 51, 0));
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Manage Communities");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 29, 1068, -1));
-
-        lblCommVal.setText(" ");
-        add(lblCommVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 191, 30));
-
-        lblCityVal.setText(" ");
-        add(lblCityVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 191, 30));
-
-        txtCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCityActionPerformed(evt);
-            }
-        });
-        txtCity.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCityKeyReleased(evt);
-            }
-        });
-        add(txtCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 155, -1));
-
-        jLabel4.setText("House Address:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
-
-        lblHAval.setText(" ");
-        add(lblHAval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, 191, 30));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
 
         txtHA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,24 +103,51 @@ public class manageHousesjPanel extends javax.swing.JPanel {
                 txtHAKeyReleased(evt);
             }
         });
-        add(txtHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, 155, -1));
+        add(txtHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 190, -1));
 
-        tblComm.setModel(new javax.swing.table.DefaultTableModel(
+        btnAdd.setText("Add House");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 530, -1, -1));
+
+        jLabel6.setBackground(new java.awt.Color(255, 51, 0));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Manage Houses");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 29, 1068, -1));
+
+        lblHAVal.setText(" ");
+        add(lblHAVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 450, 191, 30));
+
+        lblCityVal.setText(" ");
+        add(lblCityVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 191, 30));
+
+        jLabel4.setText("House Address:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, -1, -1));
+
+        lblCommval.setText(" ");
+        add(lblCommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, 191, 30));
+
+        tblHouse.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Name", "Age", "House Address", "Community", "City"
+                "House Address", "Community", "City"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -169,152 +158,460 @@ public class manageHousesjPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblComm);
+        jScrollPane2.setViewportView(tblHouse);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 119, 1048, 139));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 1048, 139));
+
+        citydropdown.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                citydropdownMouseClicked(evt);
+            }
+        });
+        citydropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citydropdownActionPerformed(evt);
+            }
+        });
+        citydropdown.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                citydropdownKeyReleased(evt);
+            }
+        });
+        add(citydropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, 190, -1));
+
+        commdropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commdropdownActionPerformed(evt);
+            }
+        });
+        commdropdown.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                commdropdownKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                commdropdownKeyTyped(evt);
+            }
+        });
+        add(commdropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 190, -1));
+
+        srch.setText("Search House by:");
+        srch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srchActionPerformed(evt);
+            }
+        });
+        add(srch, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
+
+        ddcom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddcomActionPerformed(evt);
+            }
+        });
+        add(ddcom, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 190, -1));
+
+        ddci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddciActionPerformed(evt);
+            }
+        });
+        add(ddci, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 190, -1));
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, -1, -1));
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, -1, -1));
+
+        jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 320, -1, -1));
+
+        btnUpdate.setText("Update House");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCommunityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCommunityActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = tblComm.getSelectedRow();  // gives index of selected rows
-        if(selectedRowIndex < 0)
-        {
-           JOptionPane.showMessageDialog(this, "Select a entry to view");
-           return;
-        }
-        
-        txtHA.setText(patientlists.getPatientlist().get(selectedRowIndex).getHouseAddress());
-        cbCommunity.setText(patientlists.getPatientlist().get(selectedRowIndex).getCommunityName());
-        txtCity.setText(patientlists.getPatientlist().get(selectedRowIndex).getCityName());
-        
-        btnUpdate.setEnabled(true);
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        
-        
-        int selectedRowIndex = tblComm.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Record to update the details");
-            return;
-        }
-        
-        DefaultTableModel model = (DefaultTableModel) tblComm.getModel();
-        Patient selectedEntry = patientlists.getPatientlist().get(selectedRowIndex);
-
-//        //Patient selectedEntry = (Patient) model.getValueAt(selectedRowIndex, 1);
-////        selectedEntry.setEmployeeId(txtEmployeeId.getText());
-//        selectedEntry.setName(txtname1.getText());
-//        
-//        selectedEntry.setAge(Integer.parseInt(txtage1.getText()));
-//        selectedEntry.setPhone(Long.parseLong(txtphone1.getText()));
-        selectedEntry.setHouseAddress(txtHA.getText());
-        selectedEntry.setCommunityName(cbCommunity.getText());
-        selectedEntry.setCityName(txtCity.getText());
-        
-        populateDataToTable();
-        
-        //once deleted all the fiels in view model will be deleted
-        txtHA.setText("");
-        cbCommunity.setText("");
-        txtCity.setText("");
-        btnUpdate.setEnabled(false);
-           
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void txtCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCityActionPerformed
-
-    private void cbCommunityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbCommunityKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 '/:]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(cbCommunity.getText());
-        if(!patternmatch.matches())
-        {
-            lblCommVal.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblCommVal.setText("");
-        }
-    }//GEN-LAST:event_cbCommunityKeyReleased
-
-    private void txtCityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCityKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 '/:]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtCity.getText());
-        if(!patternmatch.matches())
-        {
-            lblCityVal.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblCityVal.setText("");
-        }
-    }//GEN-LAST:event_txtCityKeyReleased
 
     private void txtHAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHAActionPerformed
+    
+    public void populatecity() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(City c: this.citylist.getCitylist()) {
+            model.addElement(c.getCityName());
+        }
+        
+        citydropdown.setModel(model);
+        ddci.setModel(model);
+
+    }
+    
+    public void populatecommunities(City c) {
+      
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(Community com: c.getCommunitylist()) {
+            model.addElement(com.getCommunityName());
+        }
+        
+        ddcom.setModel(model);
+//        commdropdown.setSelectedIndex(-1);
+
+    }
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if(lblCityVal.getText() == ""  && lblCommval.getText() == "" && lblHAVal.getText() == "" )
+        {
+            String housetxt = txtHA.getText().toUpperCase();
+            String commtxt = (String) commdropdown.getSelectedItem();  
+
+            Community selectedComm = communitylist.searchCommunity(commtxt);
+            boolean flag = selectedComm.isHouseExist(housetxt);
+
+            if(flag){
+                JOptionPane.showMessageDialog(this, "House Already Exists!");            
+            }
+            else{
+                selectedComm.addNewHouse(housetxt);
+                JOptionPane.showMessageDialog(this, "House added!");
+            }
+            
+            txtHA.setText("");
+            citydropdown.setSelectedIndex(-1);
+            commdropdown.setSelectedIndex(-1);
+            btnSearch.setEnabled(true);
+            populatecity();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please provide all details.");
+
+        }
+        
+//        populateDataToTable();
+           
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtHAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHAKeyReleased
         // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 \\d@$!-_ %*#?&'/:]+$";
+        String PatterN = "^[a-zA-Z0-9 '/:]+$";
         Pattern pattern = Pattern.compile(PatterN);
         Matcher patternmatch = pattern.matcher(txtHA.getText());
         if(!patternmatch.matches())
         {
-            lblHAval.setText("Wrong Input, Please Try Again.");
+            lblHAVal.setText("Wrong Input, Please Try Again.");
         }
         else
         {
-            lblHAval.setText("");
+            lblHAVal.setText("");
         }
     }//GEN-LAST:event_txtHAKeyReleased
 
+    private void commdropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commdropdownActionPerformed
+        // TODO add your handling code here:
+        
+        if(commdropdown.getSelectedIndex() != (-1)){
+            lblCommval.setText(""); 
+//           
+        }
+        else{
+            lblCommval.setText("Select a Community.");
+        }
+        
+        for(Community comm: chosenCity.getCommunitylist()){
+            if(comm.getCommunityName().equals(commdropdown.getSelectedItem()))
+                chosenComm = comm;
+        }
+
+
+//        populateDataToTable();
+//        JOptionPane.showMessageDialog(this, chosenComm.getCommunityName());
+        
+        String commtxt = (String) commdropdown.getSelectedItem();
+        
+//        int flag = 0;
+//        
+//        for(Community z: communitylist.getCommunitylist()){
+//            if(z.getCommunityName().equals(commtxt)){
+//                flag=1;
+//            }
+//        }
+//        
+//        JOptionPane.showMessageDialog(this, flag);     
+        
+        
+        
+        if(this.communitylist.isCommunityExist(chosenComm.getCommunityName())){
+//            JOptionPane.showMessageDialog(this, "Community Already Exists!");            
+        }
+        else{
+            this.communitylist.addNewCommunity(chosenComm.getCommunityName());
+//            JOptionPane.showMessageDialog(this, "Community added!");
+        }
+//        JOptionPane.showMessageDialog(this,communitylist.isEmpty());
+
+        
+        
+        
+    }//GEN-LAST:event_commdropdownActionPerformed
+    
+    public void populatecommunities() {
+      
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(Community com: this.chosenCity.getCommunitylist()) {
+            model.addElement(com.getCommunityName());
+        }
+        
+        commdropdown.setModel(model);
+//        commdropdown.setSelectedIndex(-1);
+
+    }
+    
+    public void populateHouses() {
+      
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(House h: this.chosenComm.getHouselist()) {
+            model.addElement(h.getHouseAddress());
+        }
+        
+//        hdropdown.setModel(model);
+//        commdropdown.setSelectedIndex(-1);
+
+    }
+    
+    
+    private void citydropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citydropdownActionPerformed
+        // TODO add your handling code here:
+        
+        if(citydropdown.getSelectedIndex() != (-1)){
+            lblCityVal.setText("");            
+        }
+        else{
+            lblCityVal.setText("Select a City.");
+        }
+        
+        //        this.chosenCity = (City) citydropdown.getSelectedItem();
+//        JOptionPane.showMessageDialog(this, citydropdown.getSelectedItem());
+
+        for(City x: this.citylist.getCitylist()){
+            if(x.getCityName().equals(citydropdown.getSelectedItem())){
+                chosenCity=x;
+            }
+        }
+//        lblCityVal.setText("");
+        populatecommunities();       
+//        commdropdown.setSelectedIndex(-1);
+    }//GEN-LAST:event_citydropdownActionPerformed
+
+    private void citydropdownKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_citydropdownKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_citydropdownKeyReleased
+
+    private void commdropdownKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commdropdownKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_commdropdownKeyTyped
+
+    private void commdropdownKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commdropdownKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_commdropdownKeyReleased
+
+    private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srchActionPerformed
+
+    private void ddcomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddcomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddcomActionPerformed
+
+    private void ddciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddciActionPerformed
+        // TODO add your handling code here:
+
+        //        this.chosenCity = (City) citydropdown.getSelectedItem();
+        //        JOptionPane.showMessageDialog(this, citydropdown.getSelectedItem());
+
+        for(City x: this.citylist.getCitylist()){
+            if(x.getCityName().equals(ddci.getSelectedItem())){
+                chosenCity=x;
+            }
+        }
+        populatecommunities(chosenCity);
+        //        btnSearch.setEnabled(true);
+
+    }//GEN-LAST:event_ddciActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if(ddci.getSelectedIndex() != -1 || ddcom.getSelectedIndex() != -1){
+            btnSearch.setEnabled(true);
+
+            for(City x: this.citylist.getCitylist()){
+                if(x.getCityName().equals(ddci.getSelectedItem())){
+                    chosenCity=x;
+                }
+                for(Community comm: chosenCity.getCommunitylist()){
+                    if(comm.getCommunityName().equals(ddcom.getSelectedItem()))
+                    chosenComm = comm;
+                }
+
+                Community selectedComm = communitylist.searchCommunity(chosenComm.getCommunityName());
+
+//                populateDataTable(selectedComm, chosenComm.getCommunityName(), chosenCity.getCityName() );
+                
+                if(selectedComm.getHouselist().size() > 0) {
+                    populateDataTable(selectedComm, chosenComm.getCommunityName(), chosenCity.getCityName() );
+                }
+                else{
+                    JOptionPane.showMessageDialog(this,"No Houses in selected Community.");
+                }
+
+            }
+
+        }
+        else{
+//            btnSearch.setEnabled(false);
+            JOptionPane.showMessageDialog(this,"Select City and Community.");
+        }
+
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+
+        int selectedRowIndex = tblHouse.getSelectedRow();  // gives index of selected rows
+        if(selectedRowIndex < 0)
+        {
+            JOptionPane.showMessageDialog(this, "Select a House to make changes.");
+            btnUpdate.setEnabled(false);
+            //            return;
+        }
+        else{
+            btnUpdate.setEnabled(true);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+
+        Community selectedComm = communitylist.searchCommunity((String) ddcom.getSelectedItem());
+        House selectedHos = (House) selectedComm.getHouselist().get(selectedRowIndex);
+
+        citydropdown.setSelectedItem(chosenCity);
+        commdropdown.setSelectedItem(chosenComm);
+        txtHA.setText(String.valueOf(selectedHos.getHouseAddress()));
+        lblCityVal.setText("");
+        lblCommval.setText("");
+        citydropdown.setEnabled(false);
+        commdropdown.setEnabled(false);
+        btnAdd.setEnabled(false);
+        btnUpdate.setEnabled(true);
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblHouse.getSelectedRow();  // gives index of selected rows
+        if(selectedRowIndex < 0)
+        {
+            JOptionPane.showMessageDialog(this, "Select a Hospital to make changes.");
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+
+        Community selectedComm = communitylist.searchCommunity((String) ddcom.getSelectedItem());
+        House selectedHos = (House) selectedComm.getHouselist().get(selectedRowIndex);
+
+        selectedComm.deleteHouse(selectedHos);
+        JOptionPane.showMessageDialog(this, "Selected Record Deleted");
+        populateDataTable(selectedComm, chosenComm.getCommunityName(), chosenCity.getCityName() );
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedRowIndex = tblHouse.getSelectedRow();  // gives index of selected rows
+        if(selectedRowIndex < 0)
+        {
+            JOptionPane.showMessageDialog(this, "Select a Hospital to make changes.");
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
+
+        Community selectedComm = communitylist.searchCommunity((String) ddcom.getSelectedItem());
+        House selectedHos = (House) selectedComm.getHouselist().get(selectedRowIndex);
+
+        selectedHos.setHouseAddress(txtHA.getText());
+
+        //        populateDataToTable();
+        populateDataTable(selectedComm, chosenComm.getCommunityName(), chosenCity.getCityName() );
+        //
+        //once deleted all the fiels in view model will be deleted
+        citydropdown.setSelectedIndex(-1);
+        commdropdown.setSelectedIndex(-1);
+        txtHA.setText("");
+        btnAdd.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        citydropdown.setEnabled(true);
+        commdropdown.setEnabled(true);
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void citydropdownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_citydropdownMouseClicked
+        // TODO add your handling code here:   
+    }//GEN-LAST:event_citydropdownMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btnView;
-    private javax.swing.JTextField cbCommunity;
+    private javax.swing.JComboBox<String> citydropdown;
+    private javax.swing.JComboBox<String> commdropdown;
+    private javax.swing.JComboBox<String> ddci;
+    private javax.swing.JComboBox<String> ddcom;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCityVal;
-    private javax.swing.JLabel lblCommVal;
-    private javax.swing.JLabel lblHAval;
-    private javax.swing.JTable tblComm;
-    private javax.swing.JTextField txtCity;
+    private javax.swing.JLabel lblCommval;
+    private javax.swing.JLabel lblHAVal;
+    private javax.swing.JTextField srch;
+    private javax.swing.JTable tblHouse;
     private javax.swing.JTextField txtHA;
     // End of variables declaration//GEN-END:variables
 
- private void populateDataToTable() {
-        //TableModel is used to manipulate table content.
-        // type casts tablemodel to defaultTableModel.
-    DefaultTableModel model = (DefaultTableModel) tblComm.getModel();
+ private void populateDataTable(Community comm, String commN, String cityN) {
+    DefaultTableModel model = (DefaultTableModel) tblHouse.getModel();
     model.setRowCount(0); // deleting empty records
-    
-    for (Patient patient : patientlists.getPatientlist()){
-
-        Object[] row =  new Object[5];
-        row[0] = patient.getPersonName();
-        row[1] = patient.getPersonAge();
-        row[2] = patient.getHouseAddress();
-        row[3] = patient.getCommunityName();
-        row[4] = patient.getCityName();
-
+    for (House p : comm.getHouselist()){
+        Object[] row =  new Object[3];
+        row[0] = p.getHouseAddress();
+        row[1] = commN;
+        row[2] = cityN;
         model.addRow(row); // adds row to model
-
+        }
     }
-}
+
+    
 }

@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Model.CityDirectory;
 import Model.CommunityDirectory;
 import Model.Doctor;
 import Model.DoctorDirectory;
@@ -29,18 +30,18 @@ public class SystemAdmin extends javax.swing.JFrame {
     Hospital hospital;
     
     CommunityDirectory communitylist;
+    CityDirectory citylist;
     /**
      * Creates new form SystemAdmin
      */
-    public SystemAdmin(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, HospitalDirectory hospitallist, CommunityDirectory communitylist) {
+    public SystemAdmin(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, CityDirectory citylist, CommunityDirectory communitylist) {
         initComponents();
         this.patientlist = patientlist;
-        this.patient = new Patient();
         this.doctorlist = doctorlist;
-        this.doctor = new Doctor();
         this.encounterhistory = encounterhistory;
         this.hospitallist = hospitallist;
         this.communitylist = communitylist;
+        this.citylist = citylist;
     }
 
     /**
@@ -158,7 +159,7 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void hospitalbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitalbtnActionPerformed
         // TODO add your handling code here:
-        manageHospitaljPanel mp = new manageHospitaljPanel(hospitallist);
+        manageHospitaljPanel mp = new manageHospitaljPanel(citylist, communitylist, hospitallist);
 //        SplitPane.setRightComponent(mp);
 //        AddHospitaljPanel hp = new AddHospitaljPanel(HospitalDirectory hospitallist);
         WorkArea.add("manageHospitaljPanel", mp);
@@ -169,16 +170,17 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void patientbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientbtnActionPerformed
         // TODO add your handling code here:
-        managePatientJPanel mp = new managePatientJPanel(WorkArea, patientlist, encounterhistory, communitylist);
-        WorkArea.add("managePatientJPanel", mp);
-        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
-        cardlayout.next(WorkArea);
+//        managePatientJPanel mp = new managePatientJPanel(WorkArea, patientlist, encounterhistory, communitylist);
+//        WorkArea.add("managePatientJPanel", mp);
+//        CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
+//        cardlayout.next(WorkArea);
 //        SplitPane.setRightComponent(mp);
     }//GEN-LAST:event_patientbtnActionPerformed
 
     private void doctorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorbtnActionPerformed
         // TODO add your handling code here:
-        manageDoctorjPanel mp = new manageDoctorjPanel(doctorlist);
+        oldmanageDoctorjPanel mp = new oldmanageDoctorjPanel(citylist, communitylist, doctorlist);
+//        SplitPane.setRightComponent(mp);
         WorkArea.add("manageDoctorjPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
@@ -192,7 +194,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        userLoginPage ulp = new userLoginPage(patientlist, doctorlist, encounterhistory, hospitallist, communitylist);
+        userLoginPage ulp = new userLoginPage(patientlist, doctorlist, encounterhistory, citylist, communitylist);
         ulp.setVisible(true);   
     }//GEN-LAST:event_btnlogoutActionPerformed
 

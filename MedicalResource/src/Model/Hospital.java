@@ -7,7 +7,7 @@ package Model;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class Hospital extends Community{
+public class Hospital {
     //ArrayList<Hospital>
     private String hospitalName;
     private int hospitalId;

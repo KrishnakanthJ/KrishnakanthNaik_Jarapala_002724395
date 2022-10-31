@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Model.CityDirectory;
 import Model.Community;
 import Model.CommunityDirectory;
 import Model.Doctor;
@@ -29,19 +30,21 @@ public class CommunityAdminPage extends javax.swing.JFrame {
     HospitalDirectory hospitallist;
     Hospital hospital;
     CommunityDirectory communitylist;
-    Community community;
+//    Community community;
+    
+    CityDirectory citylist;
     
     /**
      * Creates new form SystemAdmin
      */
-    public CommunityAdminPage(PatientDirectory patientlist, DoctorDirectory doctorlist, EncounterHistory encounterhistory, HospitalDirectory hospitallist, CommunityDirectory communitylist) {
+    public CommunityAdminPage(PatientDirectory patientlist, DoctorDirectory doctorlist,EncounterHistory encounterhistory, CityDirectory citylist, CommunityDirectory communitylist) {
         initComponents();
         this.patientlist = patientlist;
         this.doctorlist = doctorlist;
         this.encounterhistory = encounterhistory;
-        this.hospitallist = hospitallist;
         this.communitylist = communitylist;
-        this.community = community;
+//        this.community = community;
+        this.citylist = citylist;
     }
 
     /**
@@ -134,7 +137,8 @@ public class CommunityAdminPage extends javax.swing.JFrame {
 
     private void commbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commbtnActionPerformed
         // TODO add your handling code here:
-        manageCommunityjPanel mp = new manageCommunityjPanel(communitylist, patientlist);
+        manageCommunityjPanel mp = new manageCommunityjPanel(citylist);
+//        SplitPane.setRightComponent(mp);
         WorkArea.add("manageCommunityjPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
@@ -143,7 +147,8 @@ public class CommunityAdminPage extends javax.swing.JFrame {
 
     private void hosbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hosbtnActionPerformed
         // TODO add your handling code here:
-        manageHousesjPanel mp = new manageHousesjPanel( communitylist, patientlist);
+        manageHousesjPanel mp = new manageHousesjPanel( citylist, communitylist);
+//        SplitPane.setRightComponent(mp);
         WorkArea.add("manageHousesjPanel", mp);
         CardLayout cardlayout = (CardLayout) WorkArea.getLayout();
         cardlayout.next(WorkArea);
@@ -153,7 +158,7 @@ public class CommunityAdminPage extends javax.swing.JFrame {
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        userLoginPage ulp = new userLoginPage(patientlist, doctorlist, encounterhistory, hospitallist, communitylist);
+        userLoginPage ulp = new userLoginPage(patientlist, doctorlist, encounterhistory, citylist, communitylist);
         ulp.setVisible(true);
     }//GEN-LAST:event_btnlogoutActionPerformed
 

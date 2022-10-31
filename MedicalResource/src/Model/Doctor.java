@@ -10,11 +10,53 @@ import java.util.Map;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class Doctor extends Person{
+public class Doctor{
     int doctorID;
     private static int count = 0;
+    String doctorName;
+    String city;
+    String community;
+    String hospitalname;
     String username;
     String password;
+    
+    public Doctor(){
+        this.doctorID = count;
+        count++;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(String community) {
+        this.community = community;
+    }
+
+    public String getHospitalname() {
+        return hospitalname;
+    }
+
+    public void setHospitalname(String hospitalname) {
+        this.hospitalname = hospitalname;
+    }
+    
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+    
 
     public String getUsername() {
         return username;
@@ -41,37 +83,5 @@ public class Doctor extends Person{
     public void setDoctorID(int doctorID) {
         this.doctorID = doctorID;
     }
-    
-    public Doctor(){
-        this.doctorID = count;
-        count++;
-    }
-    
-    public Doctor(String personName, int personAge, String houseAddress, String communityName, String cityName, int doctorID, String username, String password){
-        this.doctorID = count;
-        super.personName = personName;
-        super.personAge = personAge;
-        super.houseAddress = houseAddress;
-        super.communityName = communityName;
-        super.cityName = cityName;
-        this.username = username;
-        this.password = password;        
-        count++;
-        
-    }
-    
-    
-    
-    
-//    
-    @Override
-    public String toString(){
-        return (String.valueOf(personName));
-    }
-    
-    
-    
-    
-    
-    
+  
 }

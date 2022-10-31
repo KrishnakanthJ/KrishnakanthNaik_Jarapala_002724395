@@ -4,6 +4,8 @@
  */
 package UI;
 
+import Model.City;
+import Model.CityDirectory;
 import Model.Community;
 import Model.CommunityDirectory;
 import javax.swing.JOptionPane;
@@ -11,8 +13,10 @@ import javax.swing.table.DefaultTableModel;
 import Model.HospitalDirectory;
 import Model.Hospital;
 import Model.PatientDirectory;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.DefaultComboBoxModel;
 //import medicalresourcemanagement.Patient;
 
 /**
@@ -20,18 +24,24 @@ import java.util.regex.Pattern;
  * @author Krishnakanth Naik Jarapala
  */
 public class manageCommunityjPanel extends javax.swing.JPanel {
-
+    
+    CityDirectory citylist;
+    ArrayList<Community> chosenCommlist;
     CommunityDirectory communitylist;
-    PatientDirectory patientlist ;
     private String checkError;
+    private City chosenCity;
     /**
      * Creates new form AddHospital
      */
-    public manageCommunityjPanel(CommunityDirectory communitylist, PatientDirectory patientlist) {
+    public manageCommunityjPanel(CityDirectory citylist) {
         initComponents();
-        this.communitylist = communitylist;
-        this.patientlist = patientlist;
-        btnUpdate.setEnabled(false);
+        this.citylist = citylist;
+        lblCityVal1.setText("Select a City!");
+        
+        populatecity();
+//        this.patientlist = patientlist;
+//        btnUpdate.setEnabled(false);
+//        citydropdown.setSelectedIndex(-1);
     }
 
     /**
@@ -43,46 +53,29 @@ public class manageCommunityjPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblComm = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cbCommunity = new javax.swing.JTextField();
-        btnAdd = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
+        btnAddcity = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        lblCommVal = new javax.swing.JLabel();
+        lblcommval = new javax.swing.JLabel();
         lblCityVal = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
+        citydropdown = new javax.swing.JComboBox<>();
+        addCommunity = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblCityVal1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 204, 204));
         setPreferredSize(new java.awt.Dimension(900, 700));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(900, 80));
-
-        tblComm.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Community", "City"
-            }
-        ));
-        tblComm.setPreferredSize(new java.awt.Dimension(900, 80));
-        jScrollPane1.setViewportView(tblComm);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 109, 1029, 180));
-
         jLabel2.setText("Community :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 440, -1, -1));
 
         jLabel3.setText("City :");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 50, -1));
 
         cbCommunity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,44 +87,28 @@ public class manageCommunityjPanel extends javax.swing.JPanel {
                 cbCommunityKeyReleased(evt);
             }
         });
-        add(cbCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 155, -1));
+        add(cbCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, 230, -1));
 
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnAddcity.setText("Add city");
+        btnAddcity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnAddcityActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 530, -1, -1));
-
-        btnView.setText("View & Update");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, -1, -1));
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(478, 530, -1, -1));
+        add(btnAddcity, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 51, 0));
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Manage Communities");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 29, 1068, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1068, -1));
 
-        lblCommVal.setText(" ");
-        add(lblCommVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 191, 30));
+        lblcommval.setText(" ");
+        add(lblcommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(681, 440, 220, 30));
 
         lblCityVal.setText(" ");
-        add(lblCityVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 420, 191, 30));
+        add(lblCityVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 191, 30));
 
         txtCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,95 +120,72 @@ public class manageCommunityjPanel extends javax.swing.JPanel {
                 txtCityKeyReleased(evt);
             }
         });
-        add(txtCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 155, -1));
+        add(txtCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 155, -1));
+
+        citydropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                citydropdownActionPerformed(evt);
+            }
+        });
+        citydropdown.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                citydropdownKeyReleased(evt);
+            }
+        });
+        add(citydropdown, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, 230, -1));
+
+        addCommunity.setText("Add Community");
+        addCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCommunityActionPerformed(evt);
+            }
+        });
+        add(addCommunity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 500, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(255, 51, 0));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Manage Cities");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1068, -1));
+
+        jLabel4.setText("City :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+
+        lblCityVal1.setText(" ");
+        add(lblCityVal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 400, 191, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCommunityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCommunityActionPerformed
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        
-        if(lblCityVal.getText() != "" || lblCommVal.getText() != "" ){
-            JOptionPane.showMessageDialog(this,"Please provide valid inputs to all fields");
+    private void btnAddcityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddcityActionPerformed
+        // TODO add your handling code here:        
+        if(this.citylist.isCityExist(txtCity.getText().toUpperCase())){
+            JOptionPane.showMessageDialog(this, "City Already Exists!");            
         }
-        else
-        {
-            String community = cbCommunity.getText();
-            String city = txtCity.getText();
-
-            Community per = communitylist.addNewCommunity(); // 
-
-            // sets value to ArrayList from the fields that the data is entered.
-
-            per.setCommunityName(community);
-            per.setCityName(city);
-                    
-          
-
-            // shows a dialogue message when the data clicked save button
-            JOptionPane.showMessageDialog(this,"Community details added");
-
-            // empties all the fields after saving the entered data to ArrayList to facilitate new entries.
-            
-            cbCommunity.setText("");
-            txtCity.setText("");
-            populateDataToTable();
-            
-
-        }
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = tblComm.getSelectedRow();  // gives index of selected rows
-        if(selectedRowIndex < 0)
-        {
-           JOptionPane.showMessageDialog(this, "Select a entry to view");
-           return;
+        else{
+            this.citylist.addNewCity(txtCity.getText().toUpperCase());
+            JOptionPane.showMessageDialog(this, "City added!");
         }
         
-        cbCommunity.setText(communitylist.getPatientlist().get(selectedRowIndex).getCommunityName());
-        txtCity.setText(communitylist.getPatientlist().get(selectedRowIndex).getCityName());
-        
-        btnAdd.setEnabled(false);
-        btnUpdate.setEnabled(true);
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-        
-        
-        int selectedRowIndex = tblComm.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Record to update the employee details");
-            return;
-        }
-        
-        DefaultTableModel model = (DefaultTableModel) tblComm.getModel();
-        Community selectedEntry = communitylist.getPatientlist().get(selectedRowIndex);
-
-//        //Patient selectedEntry = (Patient) model.getValueAt(selectedRowIndex, 1);
-////        selectedEntry.setEmployeeId(txtEmployeeId.getText());
-//        selectedEntry.setName(txtname1.getText());
-//        
-//        selectedEntry.setAge(Integer.parseInt(txtage1.getText()));
-//        selectedEntry.setPhone(Long.parseLong(txtphone1.getText()));
-
-        selectedEntry.setCommunityName(cbCommunity.getText());
-        selectedEntry.setCityName(txtCity.getText());
-        
-        populateDataToTable();
-        
-        //once deleted all the fiels in view model will be deleted
-        cbCommunity.setText("");
+        populatecity();
         txtCity.setText("");
-        btnAdd.setEnabled(true);
-        btnUpdate.setEnabled(false);
-           
-    }//GEN-LAST:event_btnUpdateActionPerformed
+        lblCityVal1.setText("Select a City!");
+    }//GEN-LAST:event_btnAddcityActionPerformed
 
+    public void populatecity() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(City c: this.citylist.getCitylist()) {
+            model.addElement(c.getCityName());
+        }       
+        citydropdown.setModel(model);
+        citydropdown.setSelectedIndex(-1);
+    }
+    
+    
     private void txtCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCityActionPerformed
@@ -243,11 +197,11 @@ public class manageCommunityjPanel extends javax.swing.JPanel {
         Matcher patternmatch = pattern.matcher(cbCommunity.getText());
         if(!patternmatch.matches())
         {
-            lblCommVal.setText("Wrong Input, Please Try Again.");
+            lblcommval.setText("Wrong Input, Please Try Again.");
         }
         else
         {
-            lblCommVal.setText("");
+            lblcommval.setText("");
         }
     }//GEN-LAST:event_cbCommunityKeyReleased
 
@@ -266,38 +220,118 @@ public class manageCommunityjPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtCityKeyReleased
 
+    private void citydropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citydropdownActionPerformed
+        // TODO add your handling code here:
+        
+//        this.chosenCity = (City) citydropdown.getSelectedItem();
+//        JOptionPane.showMessageDialog(this, citydropdown.getSelectedItem());
+//      
+
+        for(City x: this.citylist.getCitylist()){
+            if(x.getCityName().equals(citydropdown.getSelectedItem())){
+                chosenCity= x;
+            }
+        }
+        
+        if(citydropdown.getSelectedIndex() != (-1)){
+            lblCityVal1.setText("");            
+        }
+        else{
+            lblCityVal1.setText("Select a City.");
+        }
+
+//        for(City xx: citylist){
+//            JOptionPane.showMessageDialog(this, xx.getCityName());
+//        }
+//        JOptionPane.showMessageDialog(this, this.citylist.getCitylist().contains(citydropdown.getSelectedItem()));
+//        
+//        JOptionPane.showMessageDialog(this, chosenCity);
+//
+//        chosenCommlist = chosenCity.getCommunitylist();
+//        JOptionPane.showMessageDialog(this, (chosenCommlist).size());
+
+    }//GEN-LAST:event_citydropdownActionPerformed
+
+    private void addCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCommunityActionPerformed
+        // TODO add your handling code here:
+        if(lblCityVal1.getText() == ""  && lblcommval.getText() == "" && cbCommunity.getText() != "" )
+        {
+            boolean flag = chosenCity.isCommunityExist(cbCommunity.getText().toUpperCase());
+            if(flag){
+                JOptionPane.showMessageDialog(this, "Community Already Exists!");            
+            }
+            else{
+                chosenCity.addNewCommunity(cbCommunity.getText().toUpperCase());
+                JOptionPane.showMessageDialog(this, "Community added!");
+            }
+            
+            citydropdown.setSelectedIndex(-1);
+            cbCommunity.setText("");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please provide all details.");
+        }
+    }//GEN-LAST:event_addCommunityActionPerformed
+
+    private void citydropdownKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_citydropdownKeyReleased
+        // TODO add your handling code here:
+        for(City x: this.citylist.getCitylist()){
+//            JOptionPane.showMessageDialog(this, x);
+            if(x.getCityName().equals(citydropdown.getSelectedItem().toString())){
+                chosenCity= x;
+            }
+        } 
+        
+        lblCityVal1.setText("");
+//        populatecommunities();
+    }//GEN-LAST:event_citydropdownKeyReleased
+//
+//    public void populatecommunities() {
+////        for(Community com: this.chosenCity.getCommunitylist()) {
+////            System.out.println(com.getCommunityName());
+////        }
+//        
+//        DefaultComboBoxModel model = new DefaultComboBoxModel();
+//        
+//        for(Community com: this.chosenCity.getCommunitylist()) {
+//            model.addElement(com.getCommunityName());
+//        }
+//        
+//        commdropdown.setModel(model);
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btnView;
+    private javax.swing.JButton addCommunity;
+    private javax.swing.JButton btnAddcity;
     private javax.swing.JTextField cbCommunity;
+    private javax.swing.JComboBox<String> citydropdown;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblCityVal;
-    private javax.swing.JLabel lblCommVal;
-    private javax.swing.JTable tblComm;
+    private javax.swing.JLabel lblCityVal1;
+    private javax.swing.JLabel lblcommval;
     private javax.swing.JTextField txtCity;
     // End of variables declaration//GEN-END:variables
-
- private void populateDataToTable() {
-        //TableModel is used to manipulate table content.
-        // type casts tablemodel to defaultTableModel.
-    DefaultTableModel model = (DefaultTableModel) tblComm.getModel();
-    model.setRowCount(0); // deleting empty records
-    
-    // looping over profileHistory of employees.
-    // getProfileHistory returns the history of employee records.
-    for (Community p : communitylist.getPatientlist()){
-        
-        // row is array of objects with 9 menbers. (1 for each column)
-        Object[] row =  new Object[2];
-        row[0] = p.getCommunityName();
-        row[1] = p.getCityName();
-        model.addRow(row); // adds row to model
-
-    }
-    }
+//
+// private void populateDataToTable() {
+//        //TableModel is used to manipulate table content.
+//        // type casts tablemodel to defaultTableModel.
+//    DefaultTableModel model = (DefaultTableModel) tblComm.getModel();
+//    model.setRowCount(0); // deleting empty records
+//    
+//    // looping over profileHistory of employees.
+//    // getProfileHistory returns the history of employee records.
+//    for (Community p : communitylist.getPatientlist()){
+//        
+//        // row is array of objects with 9 menbers. (1 for each column)
+//        Object[] row =  new Object[2];
+//        row[0] = p.getCommunityName();
+//        row[1] = p.getCityName();
+//        model.addRow(row); // adds row to model
+//
+//    }
+//    }
 }

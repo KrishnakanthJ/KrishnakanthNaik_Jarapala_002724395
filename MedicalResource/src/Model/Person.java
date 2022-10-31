@@ -22,8 +22,8 @@ public class Person extends House {
         this.personGender = personGender;
         this.personAge = personAge;
         super.houseAddress = houseAddress;
-        super.cityName = cityName;
-        super.communityName = communityName;
+//        super.cityName = cityName;
+//        super.communityName = communityName;
     }
 
     public String getPersonName() {

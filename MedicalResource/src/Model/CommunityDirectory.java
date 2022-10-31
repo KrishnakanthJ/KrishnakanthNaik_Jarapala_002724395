@@ -14,11 +14,13 @@ import java.util.Set;
  */
 public class CommunityDirectory {
     
-    ArrayList<Community> communitylist = new ArrayList<Community>();
-    Set<String> unique_communities = new HashSet<String>();
+    ArrayList<Community> communitylist;
+    
+    public CommunityDirectory(){
+        this.communitylist = new ArrayList<Community>();
+    }
 
-
-    public ArrayList<Community> getPatientlist() {
+    public ArrayList<Community> getCommunitylist() {
         return communitylist;
     }
 
@@ -26,24 +28,42 @@ public class CommunityDirectory {
         this.communitylist = communitylist;
     }
     
-    
-    public Community addNewCommunity(){
+    public void addNewCommunity(String commName){
         Community comm = new Community();
+        comm.setCommunityName(commName);
         communitylist.add(comm);
-        return comm; 
     }
     
     public void deleteCommunity(Community h){
-    communitylist.remove(h);
+        communitylist.remove(h);
     }
     
     
-    public Set fetchUniqueCommunities(){
-
-        for(Community comm: communitylist){
-            unique_communities.add(comm.getCommunityName());
+    public Community searchCommunity(String comm){
+        for(Community com: communitylist){
+            if(com.getCommunityName().equals(comm)){
+                return com;
+            }
         }
-        return unique_communities;
+        return null;
     }
+    
+    public boolean isCommunityExist(String comm){
+        for(Community com: communitylist){
+            if(com.getCommunityName().equals(comm)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+//    public Set fetchUniqueCommunities(){
+//
+//        for(Community comm: communitylist){
+//            unique_communities.add(comm.getCommunityName());
+//        }
+//        return unique_communities;
+//    }
     
 }

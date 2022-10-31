@@ -8,7 +8,7 @@ package Model;
  *
  * @author Krishnakanth Naik Jarapala
  */
-public class House extends Community{
+public class House{
     String houseAddress;
 
     public String getHouseAddress() {

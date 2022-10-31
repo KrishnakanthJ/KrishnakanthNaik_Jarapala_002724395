@@ -91,7 +91,7 @@ public class PatientDirectory {
     public Set fetchUniqueCommunities(){
 
         for(Patient patient: patientlist){
-                unique_communities.add(patient.getCommunityName());
+//                unique_communities.add(patient.getCommunityName());
         }
         return unique_communities;
     }

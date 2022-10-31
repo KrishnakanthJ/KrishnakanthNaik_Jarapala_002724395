@@ -50,8 +50,8 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
 //        
         txt1.setText(Integer.toString(patient.getPatientID()));
         txt2.setText(patient.getPersonName());
-        txt3.setText(patient.getCommunityName());
-        txt4.setText(patient.getCityName());
+//        txt3.setText(patient.getCommunityName());
+//        txt4.setText(patient.getCityName());
         
         txt1.setEnabled(false);
         txt2.setEnabled(false);
@@ -409,8 +409,8 @@ public class manageEncounterjPanel extends javax.swing.JPanel {
                   
             encounter.setPatientID(patient.getPatientID());
             encounter.setPatient_name(patient.getPersonName());
-            encounter.setCity(patient.getCityName());
-            encounter.setCommunity(patient.getCommunityName());
+//            encounter.setCity(patient.getCityName());
+//            encounter.setCommunity(patient.getCommunityName());
             encounter.setHospital_id(Integer.parseInt(txt5.getText()));
             encounter.setEncounter_time(LocalDateTime.now());
             encounter.setDoctor_id(Integer.parseInt(txt6.getText()));

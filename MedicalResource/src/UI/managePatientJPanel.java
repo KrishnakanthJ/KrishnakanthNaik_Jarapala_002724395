@@ -87,8 +87,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
             row[2] = doctor.getPersonAge();
             row[3] = doctor.getPersonGender();
 //            row[4] = doctor.getHouseAddress();
-            row[4] = doctor.getCommunityName();
-            row[5] = doctor.getCityName();
+//            row[4] = doctor.getCommunityName();
+//            row[5] = doctor.getCityName();
 
             model.addRow(row); // adds row to model
 
@@ -111,8 +111,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
             row[2] = doctor.getPersonAge();
             row[3] = doctor.getPersonGender();
 //            row[4] = doctor.getHouseAddress();
-            row[4] = doctor.getCommunityName();
-            row[5] = doctor.getCityName();
+//            row[4] = doctor.getCommunityName();
+//            row[5] = doctor.getCityName();
 
             model.addRow(row); // adds row to model
 
@@ -826,8 +826,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
             doc.setPersonGender(gender);
             doc.setPersonAge(age);
             doc.setHouseAddress(houseaddress);
-            doc.setCommunityName(community);
-            doc.setCityName(city);
+//            doc.setCommunityName(community);
+//            doc.setCityName(city);
             doc.setUsername(username);
             doc.setPassword(pwd);
             JOptionPane.showMessageDialog(this, "Patient created successfully!");
@@ -902,8 +902,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
             selectedEntry.setPersonAge(Integer.parseInt(txt_age.getText()));
             selectedEntry.setPersonGender(txt_gender.getSelectedItem().toString());
             selectedEntry.setHouseAddress((txt_ha.getText()));
-            selectedEntry.setCommunityName(txt_comm.getSelectedItem().toString());
-            selectedEntry.setCityName(txt_city.getText());
+//            selectedEntry.setCommunityName(txt_comm.getSelectedItem().toString());
+//            selectedEntry.setCityName(txt_city.getText());
             selectedEntry.setUsername(txt_un.getText());
             selectedEntry.setPassword(txt_pwd.getText());
 
@@ -1042,8 +1042,8 @@ public class managePatientJPanel extends javax.swing.JPanel {
         txt_age.setText(String.valueOf(selectedEntry.getPersonAge()));
         txt_gender.setSelectedItem(selectedEntry.getPersonGender());
         txt_ha.setText(selectedEntry.getHouseAddress());
-        txt_comm.setSelectedItem(selectedEntry.getCommunityName());
-        txt_city.setText(selectedEntry.getCityName());
+//        txt_comm.setSelectedItem(selectedEntry.getCommunityName());
+//        txt_city.setText(selectedEntry.getCityName());
         txt_un.setText(String.valueOf(selectedEntry.getUsername()));
         txt_pwd.setText(selectedEntry.getPassword());
     }//GEN-LAST:event_btnUpdate1ActionPerformed
