@@ -1,15 +1,17 @@
 # KrishnakanthNaik_Jarapala_002724395
 
-# HR Employee Management System
+# Medical Resource Management System
 
 ### Introduction
 
-This is an Employee profile management system, that helps Human Resource in an organization to maintain their employee data.
+This is an Medical Resources management system, that helps admins to add communities, cities, hospitals, doctors, patients, and encounters. employee data.
 
 #### Functionalities
  CRUD - `Create` `Read` `Update` `Delete`
  
- User can create , read, update and delete employee profile through this system.
+ System ADMIN and Community Admin can create , read, update and delete Patients, Doctors, Encounters, Hospitals profile through this system.
+ Doctors can add encounters.
+ Patients can check their encounter history and book appointments.
  
  #### Software Requirements
  - Install JDK
