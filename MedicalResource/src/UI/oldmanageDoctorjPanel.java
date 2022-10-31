@@ -4,12 +4,16 @@
  */
 package UI;
 
+import Model.City;
 import Model.CityDirectory;
+import Model.Community;
 import Model.CommunityDirectory;
 import Model.Doctor;
 import Model.DoctorDirectory;
+import Model.Hospital;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +30,9 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
     CommunityDirectory communitylist;
     CityDirectory citylist;
     
+    City chosenCity;
+    Community chosenComm;
+    
     int error_flag = 0;
     /**
      * Creates new form manageDoctorjPanel
@@ -38,6 +45,7 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         this.citylist = citylist;
         this.communitylist = communitylist;
         populateDataToTable();
+        populatecity();
     }
 
     /**
@@ -56,17 +64,11 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         txtname = new javax.swing.JTextField();
         lblId = new javax.swing.JLabel();
         lblnameval = new javax.swing.JLabel();
-        lblageval = new javax.swing.JLabel();
-        txtage = new javax.swing.JTextField();
-        lblage = new javax.swing.JLabel();
         lblHA = new javax.swing.JLabel();
-        txtHA = new javax.swing.JTextField();
         lblHAval = new javax.swing.JLabel();
         lblcomm = new javax.swing.JLabel();
-        txtcomm = new javax.swing.JTextField();
         lblcommval = new javax.swing.JLabel();
         lblCity = new javax.swing.JLabel();
-        txtcity = new javax.swing.JTextField();
         lblcityval = new javax.swing.JLabel();
         lblUN = new javax.swing.JLabel();
         txtun = new javax.swing.JTextField();
@@ -75,35 +77,28 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         txtpwd = new javax.swing.JTextField();
         lblpwdval = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
-        lblgender = new javax.swing.JLabel();
-        txtgender = new javax.swing.JComboBox<>();
+        ddhn = new javax.swing.JComboBox<>();
+        ddcity = new javax.swing.JComboBox<>();
+        ddcom = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         displayTable = new javax.swing.JTable();
         txtSearchID = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         btn_Save = new javax.swing.JButton();
-        lbl_comm = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
-        lbl_city = new javax.swing.JLabel();
         lbl_name = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
-        txt_age = new javax.swing.JTextField();
-        txt_ha = new javax.swing.JTextField();
-        txt_comm = new javax.swing.JTextField();
-        txt_city = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        lbl_age = new javax.swing.JLabel();
-        lbl_HA = new javax.swing.JLabel();
         lbl_un = new javax.swing.JLabel();
         lbl_pwd = new javax.swing.JLabel();
         txt_un = new javax.swing.JTextField();
         txt_pwd = new javax.swing.JTextField();
-        lbl_gender = new javax.swing.JLabel();
-        txt_gender = new javax.swing.JComboBox<>();
         txtSearchName = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        lbl_pwd1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -127,7 +122,7 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         jtab_add.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 68, 980, -1));
 
         lblName.setText("Name:");
-        jtab_add.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 172, 88, 23));
+        jtab_add.add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 88, 23));
 
         txtname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,7 +134,7 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
                 txtnameKeyReleased(evt);
             }
         });
-        jtab_add.add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 165, 238, -1));
+        jtab_add.add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 230, 238, -1));
 
         lblId.setText(" ");
         lblId.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -152,95 +147,34 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         lblnameval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblnameval.setForeground(new java.awt.Color(255, 51, 51));
         lblnameval.setText(" ");
-        jtab_add.add(lblnameval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 171, 420, 20));
+        jtab_add.add(lblnameval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, 420, 30));
 
-        lblageval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
-        lblageval.setForeground(new java.awt.Color(255, 51, 51));
-        lblageval.setText(" ");
-        lblageval.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                lblagevalKeyReleased(evt);
-            }
-        });
-        jtab_add.add(lblageval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 261, 430, 30));
-
-        txtage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtageActionPerformed(evt);
-            }
-        });
-        txtage.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtageKeyReleased(evt);
-            }
-        });
-        jtab_add.add(txtage, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 261, 238, -1));
-
-        lblage.setText("Age:");
-        jtab_add.add(lblage, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 261, 88, 30));
-
-        lblHA.setText("House Address:");
-        jtab_add.add(lblHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 312, 124, -1));
-
-        txtHA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHAActionPerformed(evt);
-            }
-        });
-        txtHA.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtHAKeyReleased(evt);
-            }
-        });
-        jtab_add.add(txtHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 309, 238, -1));
+        lblHA.setText("Hospital Name");
+        jtab_add.add(lblHA, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 370, 120, -1));
 
         lblHAval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblHAval.setForeground(new java.awt.Color(255, 51, 51));
         lblHAval.setText(" ");
-        jtab_add.add(lblHAval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 309, 438, 30));
+        jtab_add.add(lblHAval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 370, 438, 30));
 
         lblcomm.setText("Community:");
-        jtab_add.add(lblcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, 30));
-
-        txtcomm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcommActionPerformed(evt);
-            }
-        });
-        txtcomm.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtcommKeyReleased(evt);
-            }
-        });
-        jtab_add.add(txtcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 358, 238, -1));
+        jtab_add.add(lblcomm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 100, 30));
 
         lblcommval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblcommval.setForeground(new java.awt.Color(255, 51, 51));
         lblcommval.setText(" ");
-        jtab_add.add(lblcommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 358, 438, 30));
+        jtab_add.add(lblcommval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 320, 438, 30));
 
         lblCity.setText("City:");
-        jtab_add.add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 406, 88, 31));
-
-        txtcity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcityActionPerformed(evt);
-            }
-        });
-        txtcity.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtcityKeyReleased(evt);
-            }
-        });
-        jtab_add.add(txtcity, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 407, 238, -1));
+        jtab_add.add(lblCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 88, 31));
 
         lblcityval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblcityval.setForeground(new java.awt.Color(255, 51, 51));
         lblcityval.setText(" ");
-        jtab_add.add(lblcityval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 407, 430, 30));
+        jtab_add.add(lblcityval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 430, 30));
 
         lblUN.setText("User Name:");
-        jtab_add.add(lblUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 456, 110, 30));
+        jtab_add.add(lblUN, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 110, 30));
 
         txtun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,15 +186,15 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
                 txtunKeyReleased(evt);
             }
         });
-        jtab_add.add(txtun, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 456, 238, -1));
+        jtab_add.add(txtun, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 238, -1));
 
         lblunval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblunval.setForeground(new java.awt.Color(255, 51, 51));
         lblunval.setText(" ");
-        jtab_add.add(lblunval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 456, 380, 30));
+        jtab_add.add(lblunval, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 380, 30));
 
         lblpwd.setText("Password:");
-        jtab_add.add(lblpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 504, 88, 31));
+        jtab_add.add(lblpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 88, 31));
 
         txtpwd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,11 +206,11 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
                 txtpwdKeyReleased(evt);
             }
         });
-        jtab_add.add(txtpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 505, 238, -1));
+        jtab_add.add(txtpwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 480, 238, -1));
 
         lblpwdval.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         lblpwdval.setForeground(new java.awt.Color(255, 51, 51));
-        jtab_add.add(lblpwdval, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 503, 430, 30));
+        jtab_add.add(lblpwdval, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 430, 30));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -286,16 +220,26 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         });
         jtab_add.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 595, 110, -1));
 
-        lblgender.setText("Gender");
-        jtab_add.add(lblgender, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 216, 75, -1));
-
-        txtgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-        txtgender.addActionListener(new java.awt.event.ActionListener() {
+        ddhn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtgenderActionPerformed(evt);
+                ddhnActionPerformed(evt);
             }
         });
-        jtab_add.add(txtgender, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 213, 238, -1));
+        jtab_add.add(ddhn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 240, -1));
+
+        ddcity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddcityActionPerformed(evt);
+            }
+        });
+        jtab_add.add(ddcity, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 240, -1));
+
+        ddcom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddcomActionPerformed(evt);
+            }
+        });
+        jtab_add.add(ddcom, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 240, -1));
 
         jTab_manage.addTab("Add New Doctor", jtab_add);
 
@@ -360,9 +304,6 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         });
         jPanel2.add(btn_Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(519, 580, 110, -1));
 
-        lbl_comm.setText("Community:");
-        jPanel2.add(lbl_comm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 463, 132, -1));
-
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,28 +312,15 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         });
         jPanel2.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 276, -1, -1));
 
-        lbl_city.setText("City:");
-        jPanel2.add(lbl_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 516, 111, -1));
-
         lbl_name.setText("Name:");
-        jPanel2.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 316, 111, -1));
+        jPanel2.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 111, -1));
 
         txt_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nameActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 313, 219, -1));
-        jPanel2.add(txt_age, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 361, 219, -1));
-
-        txt_ha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_haActionPerformed(evt);
-            }
-        });
-        jPanel2.add(txt_ha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 409, 219, -1));
-        jPanel2.add(txt_comm, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 219, -1));
-        jPanel2.add(txt_city, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 219, -1));
+        jPanel2.add(txt_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 219, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
@@ -400,30 +328,19 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         jLabel2.setText("Manage Doctor Details");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 16, 1062, -1));
 
-        lbl_age.setText("Age:");
-        jPanel2.add(lbl_age, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 364, 111, -1));
-
-        lbl_HA.setText("House Address:");
-        jPanel2.add(lbl_HA, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 412, 132, -1));
-
         lbl_un.setText("User Name:");
-        jPanel2.add(lbl_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 455, 111, -1));
+        jPanel2.add(lbl_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, 111, -1));
 
-        lbl_pwd.setText("Password:");
-        jPanel2.add(lbl_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 516, 111, -1));
-        jPanel2.add(txt_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 460, 219, -1));
-        jPanel2.add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 510, 219, -1));
+        lbl_pwd.setText("Hospital Name:");
+        jPanel2.add(lbl_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 520, 140, -1));
 
-        lbl_gender.setText("Gender:");
-        jPanel2.add(lbl_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 414, 111, 20));
-
-        txt_gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-        txt_gender.addActionListener(new java.awt.event.ActionListener() {
+        txt_un.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_genderActionPerformed(evt);
+                txt_unActionPerformed(evt);
             }
         });
-        jPanel2.add(txt_gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 412, 219, -1));
+        jPanel2.add(txt_un, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 219, -1));
+        jPanel2.add(txt_pwd, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 219, -1));
 
         txtSearchName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,6 +360,11 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         jTextField2.setText("Search by Doctor Attributes");
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 70, -1, 30));
 
+        lbl_pwd1.setText("Password:");
+        jPanel2.add(lbl_pwd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 111, -1));
+
+        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 220, -1));
+
         jTab_manage.addTab("Manage Doctors", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -461,6 +383,43 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    public void populatecommunities(City c) {
+      
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(Community com: c.getCommunitylist()) {
+            model.addElement(com.getCommunityName());
+        }
+        
+        ddcom.setModel(model);
+//        commdropdown.setSelectedIndex(-1);
+
+    }
+    
+    public void populatecity() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(City c: this.citylist.getCitylist()) {
+            model.addElement(c.getCityName());
+        }
+        
+        ddcity.setModel(model);
+
+    }
+    
+    public void populatehospitals(Community c) {
+      
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        
+        for(Hospital com: c.getHospitallist()) {
+            model.addElement(com.getHospitalName());
+        }
+        
+        ddhn.setModel(model);
+//        commdropdown.setSelectedIndex(-1);
+
+    }
     
     private void populateDataToTable() {
         //TableModel is used to manipulate table content.
@@ -584,7 +543,7 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
 //        System.out.println("name"+txtEmployeeName.getText());
         
 
-        if(txt_name.getText().isEmpty() || txt_age.getText().isEmpty() || txt_ha.getText().isEmpty() || txt_comm.getText().isEmpty() || txt_city.getText().isEmpty() || txt_un.getText().isEmpty() || txt_pwd.getText().isEmpty()){
+        if(txt_name.getText().isEmpty() || txt_un.getText().isEmpty() || txt_pwd.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill Doctor Information Correctly");
         }
         else{           
@@ -600,11 +559,6 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
             populateDataToTable();
 
             txt_name.setText("");
-            txt_age.setText("");
-            txt_gender.setSelectedIndex(-1);
-            txt_ha.setText("");
-            txt_comm.setText("");
-            txt_city.setText("");
             txt_un.setText("");
             txt_pwd.setText("");
         }
@@ -633,55 +587,6 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_nameActionPerformed
 
-    private void txt_haActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_haActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_haActionPerformed
-
-    private void txtHAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHAKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 \\d@$!-_ %*#?&'/:]+$";  
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtHA.getText());
-        if(!patternmatch.matches())
-        {
-            lblHAval.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblHAval.setText("");
-        }
-    }//GEN-LAST:event_txtHAKeyReleased
-
-    private void txtHAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHAActionPerformed
-
-    private void txtageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtageKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[0-9 +()-]{1,3}$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtage.getText());
-        if(!patternmatch.matches() || Integer.parseInt(txtage.getText()) > 120)
-        {
-            lblageval.setText("Wrong Input, Please Enter Valid Age.");
-            JOptionPane.showMessageDialog(this, "Please Enter Valid Age!");
-
-            error_flag = 1;
-
-        }
-        else
-        {
-            lblageval.setText("");
-            error_flag = 0;
-        }
-        
-        
-    }//GEN-LAST:event_txtageKeyReleased
-
-    private void txtageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtageActionPerformed
-
     private void lblIdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblIdKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_lblIdKeyReleased
@@ -704,44 +609,6 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
     private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnameActionPerformed
-
-    private void txtcommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcommActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcommActionPerformed
-
-    private void txtcommKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcommKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 '/:]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtcomm.getText());
-        if(!patternmatch.matches())
-        {
-            lblcommval.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblcommval.setText("");
-        }
-    }//GEN-LAST:event_txtcommKeyReleased
-
-    private void txtcityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcityActionPerformed
-
-    private void txtcityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcityKeyReleased
-        // TODO add your handling code here:
-        String PatterN = "^[a-zA-Z0-9 '/:]+$";
-        Pattern pattern = Pattern.compile(PatterN);
-        Matcher patternmatch = pattern.matcher(txtcity.getText());
-        if(!patternmatch.matches())
-        {
-            lblcityval.setText("Wrong Input, Please Try Again.");
-        }
-        else
-        {
-            lblcityval.setText("");
-        }
-    }//GEN-LAST:event_txtcityKeyReleased
 
     private void txtunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtunActionPerformed
         // TODO add your handling code here:
@@ -802,11 +669,9 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:           
         String name = txtname.getText();
-        String gender = txtgender.getSelectedItem().toString();
-        int age = Integer.parseInt(txtage.getText());
-        String houseaddress = txtHA.getText();
-        String community = txtcomm.getText();
-        String city = txtcity.getText();
+        String city = ddcity.getSelectedItem().toString();
+        String hosname = ddhn.getSelectedItem().toString();
+        String community = ddcom.getSelectedItem().toString();
         String username = txtun.getText();
         String pwd = txtpwd.getText();
         
@@ -817,25 +682,20 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
 //        String userName = txtusername1.getText();
 //        String password = txtpassword1.getText();
         
-        if(error_flag == 1 || lblnameval.getText() != "" || lblHAval.getText()!="" || lblcommval.getText() != "" || lblcityval.getText() != "" || lblunval.getText() != "" || lblpwdval.getText() != ""){
+        if(lblnameval.getText() != "" || lblHAval.getText()!="" || lblcommval.getText() != "" || lblcityval.getText() != "" || lblunval.getText() != "" || lblpwdval.getText() != ""){
             JOptionPane.showMessageDialog(this, "Failed!, Please fill Doctor Information Correctly");
         }
         else{
             Doctor doc = doctorlist.addNewDoctor();
             doc.setCity(city);
             doc.setCommunity(community);
-            doc.setHospitalname(houseaddress);
+            doc.setHospitalname(hosname);
             doc.setDoctorName(name);
             doc.setUsername(username);
             doc.setPassword(pwd);
             JOptionPane.showMessageDialog(this, "Doctor Information saved!");
             
             txtname.setText("");
-            txtgender.setSelectedIndex(0);
-            txtage.setText("");
-            txtHA.setText("");
-            txtcomm.setText("");
-            txtcity.setText("");
             txtun.setText("");
             txtpwd.setText("");         
         }
@@ -846,25 +706,12 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
           
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void txtgenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtgenderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtgenderActionPerformed
-
-    private void txt_genderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_genderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_genderActionPerformed
-
     private void jTab_manageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTab_manageMouseClicked
         // TODO add your handling code here:
-        populateDataToTable();
-        txt_name.setText("");
-        txt_age.setText("");
-        txt_gender.setSelectedIndex(-1);
-        txt_ha.setText("");
-        txt_comm.setText("");
-        txt_city.setText("");
-        txt_un.setText("");
-        txt_pwd.setText("");
+//        populateDataToTable();
+        txtname.setText("");
+        txtun.setText("");
+        txtpwd.setText("");
     }//GEN-LAST:event_jTab_manageMouseClicked
 
     private void txtSearchIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchIDActionPerformed
@@ -898,13 +745,42 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtSearchNameKeyReleased
 
-    private void lblagevalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblagevalKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblagevalKeyReleased
-
     private void jTab_manageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTab_manageMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTab_manageMouseEntered
+
+    private void ddhnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddhnActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ddhnActionPerformed
+
+    private void ddcityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddcityActionPerformed
+        // TODO add your handling code here:
+        if(ddcom.getSelectedIndex() != (-1)){
+            lblcommval.setText("");            
+        }
+        else{
+            lblcommval.setText("Select a City.");
+        }
+        
+        String commtxt = (String) ddcom.getSelectedItem();
+
+        Community selectedComm = communitylist.searchCommunity(commtxt);
+        
+        populatehospitals(selectedComm);   
+        
+        
+    }//GEN-LAST:event_ddcityActionPerformed
+
+    
+    
+    private void ddcomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddcomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddcomActionPerformed
+
+    private void txt_unActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_unActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_unActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -912,7 +788,11 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_Save;
+    private javax.swing.JComboBox<String> ddcity;
+    private javax.swing.JComboBox<String> ddcom;
+    private javax.swing.JComboBox<String> ddhn;
     private javax.swing.JTable displayTable;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
@@ -927,39 +807,22 @@ public class oldmanageDoctorjPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblUN;
-    private javax.swing.JLabel lbl_HA;
-    private javax.swing.JLabel lbl_age;
-    private javax.swing.JLabel lbl_city;
-    private javax.swing.JLabel lbl_comm;
-    private javax.swing.JLabel lbl_gender;
     private javax.swing.JLabel lbl_name;
     private javax.swing.JLabel lbl_pwd;
+    private javax.swing.JLabel lbl_pwd1;
     private javax.swing.JLabel lbl_un;
-    private javax.swing.JLabel lblage;
-    private javax.swing.JLabel lblageval;
     private javax.swing.JLabel lblcityval;
     private javax.swing.JLabel lblcomm;
     private javax.swing.JLabel lblcommval;
-    private javax.swing.JLabel lblgender;
     private javax.swing.JLabel lblnameval;
     private javax.swing.JLabel lblpwd;
     private javax.swing.JLabel lblpwdval;
     private javax.swing.JLabel lblunval;
-    private javax.swing.JTextField txtHA;
     private javax.swing.JTextField txtSearchID;
     private javax.swing.JTextField txtSearchName;
-    private javax.swing.JTextField txt_age;
-    private javax.swing.JTextField txt_city;
-    private javax.swing.JTextField txt_comm;
-    private javax.swing.JComboBox<String> txt_gender;
-    private javax.swing.JTextField txt_ha;
     private javax.swing.JTextField txt_name;
     private javax.swing.JTextField txt_pwd;
     private javax.swing.JTextField txt_un;
-    private javax.swing.JTextField txtage;
-    private javax.swing.JTextField txtcity;
-    private javax.swing.JTextField txtcomm;
-    private javax.swing.JComboBox<String> txtgender;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtpwd;
     private javax.swing.JTextField txtun;
